@@ -1,0 +1,40 @@
+{
+  "completed": 12,
+  "total": 12,
+  "latest": {
+    "case": 4,
+    "itemId": "spirit-mishka-1l",
+    "plcbItem": "000098661",
+    "run": 3,
+    "executionEngine": "figranium",
+    "taskId": "task_1788378025198",
+    "taskName": "FWGS PLCB Image Extractor",
+    "outcome": "success",
+    "finalUrl": "https://www.finewineandgoodspirits.com/product/000098661",
+    "durationMs": 19812,
+    "imageUrls": [
+      "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v2450119215989133212/products/000098661_1035575_F1.jpg&height=475&width=475",
+      "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v7111356916660438873/products/000098661_1035575_B1.jpg&height=475&width=475"
+    ],
+    "primaryImageUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v2450119215989133212/products/000098661_1035575_F1.jpg&height=475&width=475",
+    "candidateCount": 2,
+    "extractionSource": "embedded_json",
+    "identityEvidence": {
+      "plcbInPrimaryUrl": true,
+      "plcbInAnyUrl": true,
+      "productPathMatch": true,
+      "skuInJsonLd": false
+    },
+    "assetKey": "/file/v2450119215989133212/products/000098661_1035575_F1.jpg",
+    "reachabilityDirect": {
+      "httpStatus": 200,
+      "contentType": "image/jpeg",
+      "bytes": 10509,
+      "reachable": true
+    },
+    "reachabilityFigranium": null,
+    "falseRecommendationRisk": false,
+    "error": null,
+    "resultOrigin": "extraction"
+  }
+}
