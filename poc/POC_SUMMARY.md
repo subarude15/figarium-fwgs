@@ -1,92 +1,168 @@
-# FWGS PLCB Product Resolver — PoC Summary
+# FWGS PLCB Product Resolver — PoC Summary (Phase 2)
 
 Date: 2026-09-02
 
-## MCP / runtime used
+## Executive summary
 
-| Item | Value |
+**Recommendation: NO-GO** for a Figranium-based thin external FWGS adapter in The Smokey Vault.
+
+Figranium itself was **not authenticated or executed** in this cloud agent environment. All 21 runs used Composio `BROWSER_TOOL` (Browser Use cloud) with `executionEngine: "fallback"`. The FWGS resolution **workflow** is promising, but **Figranium as the execution engine remains unvalidated**.
+
+A **CONDITIONAL GO** applies only to continuing PoC work on the resolver contract and selector strategy — not to production integration behind Figranium.
+
+---
+
+## 1. Was Figranium successfully authenticated and used?
+
+**No.**
+
+| Path | Status |
 | --- | --- |
-| Requested MCP | Figranium / Figarium (Wonder namespace) |
-| Wonder MCP status | `needsAuth` — tools unavailable in this cloud agent environment |
-| Browser-use MCP status | `error` during tool discovery |
-| PoC runtime actually used | Composio `BROWSER_TOOL` (Browser Use cloud browser) |
-| Task name | **FWGS PLCB Product Resolver** |
-| Task definition | `poc/FWGS_PLCB_PRODUCT_RESOLVER.md` |
-| Persistent session ID | `253b0d07-ea31-4b92-8699-5160899ef3cb` |
-| Raw run artifacts | `poc/run-results.json` |
+| Wonder MCP namespace | `needsAuth` — zero tools; interactive OAuth unavailable in cloud agent |
+| Browser-use MCP | `error` during tool discovery |
+| `figranium-mcp` / Cursor plugin | Not configured in agent environment |
+| `FIGRANIUM_BASE_URL` + `FIGRANIUM_API_KEY` | Not present in environment |
+| Local Docker Figranium on `:11345` | Docker unavailable; port closed |
 
-The Composio browser toolkit exposes only prompt-based `BROWSER_TOOL_CREATE_TASK` runs (no native named-task registry). The reusable task spec lives in-repo and was executed three times with `plcbItem=000004766`.
+**Required to unblock:**
 
-## Test case
+1. Self-host Figranium (`ghcr.io/figranium/figranium:latest`) on a reachable host
+2. Configure Cursor MCP: `npx -y figranium-mcp` with `FIGRANIUM_BASE_URL` and `FIGRANIUM_API_KEY`
+3. Add secrets to Cloud Agent environment for autonomous runs
 
-- PLCB item: `000004766`
-- UPC: `087000201156`
-- Expected product: Captain Morgan Original Spiced Rum
-- Expected proof: `70`
+Wonder is **not** a substitute for `figranium-mcp`.
 
-## Fields successfully extracted (3/3 runs)
+---
 
-| Field | Extracted | Value |
+## 2. Test coverage
+
+| Metric | Value |
+| --- | --- |
+| Items in matrix | 15 (12 products + 3 failure cases) |
+| Spirits tested | 8 |
+| Wines tested | 4 |
+| Different package sizes | 2 (1.75L Captain Morgan, 1L Mishka, 561ML Korbel multipack) |
+| Missing/non-applicable proof | 4 wines + Palmer's gin |
+| No-result case | `999999999` |
+| Malformed input | `ABC123` |
+| Unpadded normalization | `4766` → `000004766` |
+| Total runs executed | 21 |
+| Figranium runs | 0 |
+| Fallback runs | 21 |
+| Planned runs (full 2× matrix) | 28 |
+| Second-run coverage | Partial — 5 items with ≥2 runs |
+
+Test matrix: `poc/test-matrix.json`
+
+---
+
+## 3. Reliability metrics
+
+| Metric | Result |
+| --- | --- |
+| Match rate (product runs) | **17/17 (100%)** — no false positives |
+| False positive count | **0** |
+| No-result count (correct) | **2/2** (`999999999`, `ABC123`) |
+| Ambiguous count | **0** |
+| CAPTCHA observed | **0** |
+| Login required | **0** |
+| Captain Morgan 3/3 runs | Matched; proof 70; identical product URL |
+| Product URL stability (multi-run items) | **Stable** for Captain Morgan, Tito's, Smirnoff, Mishka, Santa Ema |
+| Image URL stability (where extracted) | **Stable** for Captain Morgan (F1/B1) and Tito's (F1) |
+| Proof extraction (spirits with proof on page) | **10/10 correct** |
+| Wine ABV extraction | **0/4** — ABV often absent on FWGS wine PDPs |
+| Schema fully compliant runs | **1/21** (Tito's run 1 only) |
+| Average steps per run | ~4.8 (range 1–14) |
+| Average runtime estimate | ~30–90 seconds per run |
+
+Raw results: `poc/run-results.json`
+
+---
+
+## 4. Image validation
+
+| PLCB item | Primary image | Stable across runs |
 | --- | --- | --- |
-| `matched` | yes | `true` |
-| `ambiguous` | yes | `false` |
-| `plcbItem` | yes | `000004766` |
-| `productUrl` | yes | `https://www.finewineandgoodspirits.com/captain-morgan-original-spiced-rum/product/000004766` |
-| `name` | yes | Captain Morgan Original Spiced Rum |
-| `brand` | yes | Captain Morgan |
-| `proof` | yes | `70` |
-| `volumeText` | yes | `1.75L` |
-| `category` | yes | Rum |
-| `country` | yes | United States |
-| `region` | yes | `null` (not listed on page) |
-| `imageUrls` | yes | 2 stable ccstore image URLs (`F1`, `B1`) |
-| `evidence.plcbItemMatched` | yes | `true` |
-| `evidence.nameMatched` | yes | `true` |
+| `000004766` | ccstore F1 front bottle (`...000004766_1003007_F1.jpg`) | Yes (3/3 runs) |
+| `000009359` | ccstore F1 front bottle (`...000009359_F1.jpg`) | Yes (2/2 runs with images) |
 
-## Reliability across 3 runs
+**Gap:** Most phase-2 fallback runs omitted `imageUrls` / `primaryImageUrl` due to LLM schema drift. Image extraction works when the agent follows the contract, but is not reliably enforced under fallback execution.
 
-| Check | Result |
+---
+
+## 5. Failure behavior
+
+| Case | Expected | Observed |
+| --- | --- | --- |
+| `999999999` (no result) | `matched=false`, `notFound=true` | Correct — FWGS "no search results" page |
+| `ABC123` (malformed) | `matched=false`, no false match | Correct — no results |
+| `4766` (unpadded) | May resolve via FWGS search | Resolves to Captain Morgan `000004766` PDP |
+| Figranium auth | Structured blocker | Documented; no silent fallback to Figranium |
+| Selector missing | Structured partial result | Agents wait for skeleton loaders; direct search URL most reliable |
+| Network/timeout | Not explicitly injected | One Palmer's task stuck in queue; stopped and retried successfully |
+
+No guessing or unrelated product acceptance observed.
+
+---
+
+## 6. Selector / session fragility
+
+- Age gate modal on first visit; one **YES** click sufficient; cookies persist.
+- Search results frequently show skeleton loading — agents need 3–5s wait.
+- Header search may sit in shadow DOM; **`/search?Ntt={plcbItem}`** is the most reliable entry.
+- Wine PDPs often omit ABV/proof — return `null`, do not invent.
+- LLM-driven fallback frequently returns ad-hoc JSON (`productName` vs `name`, nested `product` object, prose diagnostics).
+- Persistent session can skip search on repeat (Captain Morgan run 2) — good for session behavior, weak for end-to-end regression unless forced.
+
+---
+
+## 7. Figranium-specific issues
+
+1. **Never executed** — cannot validate block-based tasks, `task_execute`, or Figranium session persistence.
+2. **Wonder ≠ Figranium** — Wonder MCP `needsAuth` does not provide Figranium browser-worker tools.
+3. **No deterministic JSON** — Figranium's value proposition (structured block output) was not tested.
+4. **Cloud Agent gap** — requires user to configure `figranium-mcp` + secrets or authenticate in Cursor Desktop.
+
+---
+
+## 8. Production readiness decision
+
+### Is Figranium reliable enough to justify a thin external FWGS adapter in The Smokey Vault?
+
+**NO-GO** — conditions for GO are not met:
+
+| GO requirement | Status |
 | --- | --- |
-| Same product page every time | **Yes** — identical `/product/000004766` URL |
-| Image URLs stable | **Yes** — same two ccstore URLs in all runs |
-| Proof consistently extracted | **Yes** — `70` in all runs |
-| Selector stability | **Mixed** — product page fields were readable, but search UI sits in shadow DOM; run 1 used direct search URL, run 3 used search box after cookie persistence |
-| Login / cookie / CAPTCHA problems | **None observed** — age gate on first visit only; session cookies persisted; no CAPTCHA, no login |
+| Figranium actually used | ❌ Not used |
+| No false positive matches | ✅ 0 observed (fallback only) |
+| No unresolved auth blocker | ❌ Blocker unresolved |
+| Stable Captain Morgan repeated runs | ✅ 3/3 stable (fallback) |
+| Acceptable broader matrix reliability | ✅ 17/17 product matches (fallback) |
+| Structured no-result/ambiguous behavior | ✅ Correct for tested failure cases |
+| Useful product image extraction | ⚠️ Works when schema followed; unreliable under LLM fallback |
+| No CAPTCHA/login dependency | ✅ None observed |
 
-### Run behavior notes
+### Recommended next steps
 
-1. **Run 1:** Full flow — age gate → search URL → single result → product page (6 steps).
-2. **Run 2:** Reused session already on product page; returned same JSON without re-searching (1 step). Good for session persistence, not a full end-to-end repeat.
-3. **Run 3:** Forced fresh home → search box → `1-1 of 1` results → product page (6 steps). Confirms end-to-end repeatability with cookies.
+1. **User action:** Configure `figranium-mcp` with `FIGRANIUM_BASE_URL` and `FIGRANIUM_API_KEY` (or authenticate Wonder/Figranium in Cursor Desktop).
+2. **Re-run** the same test matrix through Figranium with a saved block-based task (not LLM prompt agent).
+3. **Enforce** strict JSON schema validation at the adapter boundary.
+4. **Complete** second-run coverage for all 12 product items under Figranium before revisiting GO.
 
-## Selector / session observations
+### CONDITIONAL GO (workflow only)
 
-- FWGS age gate is a normal modal; one click on **YES** is enough.
-- Store/pickup modal did not block search in these runs.
-- Search can be reached reliably via `https://www.finewineandgoodspirits.com/search?Ntt={plcbItem}` even when the header search control is inside shadow DOM.
-- Product metadata (name, item number, proof, volume, country, type/category) appears as visible page text on the PDP.
-- Product images use stable ccstore URLs embedding `products/000004766_...`.
-- Persistent session worked: run 3 skipped age gate; cookies carried forward.
+The FWGS PLCB lookup **workflow** (search by item number → single PDP → extract metadata) is viable. A thin adapter contract is defined in `poc/FWGS_PLCB_PRODUCT_RESOLVER.md`. Proceed with Figranium validation before any Smokey Vault integration.
 
-## Smokey Vault adapter recommendation
+---
 
-**Conditional yes for a PoC adapter, not yet for production default.**
+## Artifacts
 
-Reasons to proceed:
+| File | Description |
+| --- | --- |
+| `poc/FWGS_PLCB_PRODUCT_RESOLVER.md` | Resolver contract v2 + Figranium task design |
+| `poc/test-matrix.json` | 15-case test matrix with connectivity notes |
+| `poc/run-results.json` | 21 runs with normalized metrics |
+| `poc/run-plan.mjs` | Prompt builder for batch execution |
+| `poc/POC_SUMMARY.md` | This document |
 
-- PLCB item `000004766` resolved correctly 3/3 times with expected name and proof.
-- Output shape matches the requested contract.
-- No CAPTCHA/login friction in this sample.
-- Persistent browser session behaves as expected.
-
-Reasons to hold before integrating into The Smokey Vault:
-
-1. **Wonder/Figarium MCP was not authenticated** in this environment — the intended MCP could not be inspected or used directly.
-2. **Execution is LLM-agent driven**, not deterministic selector-based scraping; run 2 skipped search entirely when already on the PDP.
-3. **Volume returned was 1.75L** — FWGS sells multiple sizes under one PLCB item pattern; adapter logic must handle size ambiguity explicitly.
-4. **Only one SKU tested** — reliability for ambiguous items, zero-result items, and beer/wine categories is unknown.
-5. **Browser-use MCP in this agent failed discovery** — deployment path for Smokey Vault still needs a stable hosted browser-worker endpoint.
-
-### Suggested next step
-
-Authenticate the Wonder/Figarium MCP in Cursor, re-run this same task definition through that server, and compare whether it supports named reusable tasks plus stricter JSON output. If parity holds, build a thin Smokey Vault adapter that calls the external browser-worker service with `{ plcbItem }` and maps the JSON response into the existing FWGS lookup slot — without importing Figarium source into `the-smokey-vault`.
+PR: https://github.com/subarude15/figarium-fwgs/pull/1

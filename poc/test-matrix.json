@@ -1,0 +1,126 @@
+{
+  "version": 2,
+  "source": "Manually curated from FWGS public product URLs and PoC item 000004766. Project does not ship a PLCB item fixture list suitable for live FWGS validation.",
+  "executionEngineRequested": "figranium",
+  "executionEngineActual": "fallback",
+  "figraniumConnectivity": {
+    "available": false,
+    "blocker": "Wonder MCP namespace reports needsAuth; interactive OAuth unavailable in cloud agent. No FIGRANIUM_BASE_URL/FIGRANIUM_API_KEY secrets present. Docker unavailable to self-host ghcr.io/figranium/figranium on localhost:11345.",
+    "requiredConfiguration": [
+      "Install Figranium MCP in Cursor (~/.cursor/mcp.json) with command npx -y figranium-mcp",
+      "Set FIGRANIUM_BASE_URL (default http://localhost:11345)",
+      "Set FIGRANIUM_API_KEY from Figranium Settings → System",
+      "Run self-hosted Figranium via Docker Compose or npm on a reachable host"
+    ]
+  },
+  "items": [
+    {
+      "id": "spirit-captain-morgan-175l",
+      "category": "spirit",
+      "plcbItem": "000004766",
+      "expected": { "upc": "087000201156", "name": "Captain Morgan Original Spiced Rum", "proof": 70 },
+      "notes": "Control item from phase-1 PoC; 1.75L listing",
+      "runsRequired": 3
+    },
+    {
+      "id": "spirit-titos-750ml",
+      "category": "spirit",
+      "plcbItem": "000009359",
+      "expected": { "upc": null, "name": "Tito's Handmade Vodka", "proof": 80 },
+      "notes": "750ML spirit"
+    },
+    {
+      "id": "spirit-smirnoff-rwb",
+      "category": "spirit",
+      "plcbItem": "000001290",
+      "expected": { "upc": null, "name": "Smirnoff Red White and Berry Vodka", "proof": 60 },
+      "notes": "Flavored vodka 750ML"
+    },
+    {
+      "id": "spirit-palmers-gin",
+      "category": "spirit",
+      "plcbItem": "000009436",
+      "expected": { "upc": null, "name": "Palmer's Liberty Gin", "proof": null },
+      "notes": "PA craft gin"
+    },
+    {
+      "id": "spirit-mishka-1l",
+      "category": "spirit",
+      "plcbItem": "000098661",
+      "expected": { "upc": null, "name": "Mishka Vodka", "proof": 80 },
+      "notes": "1L package size (different from 750ML spirits)"
+    },
+    {
+      "id": "spirit-horse-soldier-bourbon",
+      "category": "spirit",
+      "plcbItem": "000088484",
+      "expected": { "upc": null, "name": "Horse Soldier Small Batch Bourbon", "proof": null },
+      "notes": "Bourbon 750ML"
+    },
+    {
+      "id": "spirit-limoncello",
+      "category": "spirit",
+      "plcbItem": "000006331",
+      "expected": { "upc": null, "name": "Caravella Limoncello", "proof": null },
+      "notes": "Liqueur; proof may be lower or absent on page"
+    },
+    {
+      "id": "wine-santa-ema-sauv-blanc",
+      "category": "wine",
+      "plcbItem": "100056945",
+      "expected": { "upc": null, "name": "Santa Ema El Cruce Select Terroir Sauvignon Blanc", "proof": null },
+      "notes": "Wine — expect abv not proof"
+    },
+    {
+      "id": "wine-korbel-brut",
+      "category": "wine",
+      "plcbItem": "100059831",
+      "expected": { "upc": null, "name": "Korbel Brut California Champagne", "proof": null },
+      "notes": "Sparkling wine multipack 561ML"
+    },
+    {
+      "id": "wine-educated-guess-chardonnay",
+      "category": "wine",
+      "plcbItem": "100051387",
+      "expected": { "upc": null, "name": "Educated Guess Reserve Chardonnay", "proof": null },
+      "notes": "Chairman's Selection wine"
+    },
+    {
+      "id": "wine-zweigelt",
+      "category": "wine",
+      "plcbItem": "100042845",
+      "expected": { "upc": null, "name": "Winzer Krems Classic Blauer Zweigelt", "proof": null },
+      "notes": "Red wine 750ML"
+    },
+    {
+      "id": "spirit-battlefield-vodka-pa",
+      "category": "spirit",
+      "plcbItem": "000009986",
+      "expected": { "upc": null, "name": "Old Republic Distillery Battlefield Vodka", "proof": null },
+      "notes": "PA spirits; 750ML"
+    },
+    {
+      "id": "failure-no-result",
+      "category": "failure",
+      "plcbItem": "999999999",
+      "expected": { "upc": null, "name": null, "proof": null },
+      "notes": "Likely no FWGS product match",
+      "expectNotFound": true
+    },
+    {
+      "id": "failure-malformed",
+      "category": "failure",
+      "plcbItem": "ABC123",
+      "expected": { "upc": null, "name": null, "proof": null },
+      "notes": "Malformed PLCB item input",
+      "expectNotFound": true
+    },
+    {
+      "id": "failure-unpadded",
+      "category": "failure",
+      "plcbItem": "4766",
+      "expected": { "upc": null, "name": "Captain Morgan Original Spiced Rum", "proof": 70 },
+      "notes": "Unpadded item — may still resolve or may fail; documents normalization behavior"
+    }
+  ]
+}
