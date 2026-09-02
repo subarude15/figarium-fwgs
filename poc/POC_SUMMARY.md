@@ -36,13 +36,18 @@ See `poc/figranium-validation.json` for the full Phase-1 probe record.
 | No-result behavior | **n/a** (Figranium) |
 | Silent fallback used | **No** |
 
-### Exact blocker
+### Exact blocker (updated after `fig.thesmokeybarrelbar.com` retry)
 
-1. **No `figranium` MCP namespace** in this Cloud Agent. Available namespaces include Composio, Wonder, Browser-use, etc. — not `figranium`.
-2. Desktop `~/.cursor/mcp.json` (where you may have added figranium) **does not apply** to Cloud Agents.
-3. **Wonder MCP** still reports `needsAuth`. Interactive OAuth is **unavailable** in Cloud Agents (`mcp_auth` returns desktop-only error). Wonder is not a substitute for `figranium-mcp`.
-4. Direct HTTP probe to previously supplied `http://192.168.1.2:11345/` **times out** (private LAN, not reachable from Cloud Agents).
-5. Environment secrets `FIGRANIUM_BASE_URL` / `FIGRANIUM_API_KEY` are **not present** in this agent process.
+1. **Public host is reachable:** `https://fig.thesmokeybarrelbar.com/api/health` → `200 {"status":"ok"}`.
+2. **Auth fails:** `/api/tasks` → `401 {"error":"INVALID_API_KEY"}` with the previously supplied LAN API key (tried Bearer and `x-api-key`).
+3. **No `figranium` MCP namespace** in this Cloud Agent catalog (Desktop `~/.cursor/mcp.json` does not apply).
+4. **Wonder MCP** still `needsAuth`; interactive OAuth is desktop-only.
+5. Cloud Agent secrets `FIGRANIUM_BASE_URL` / `FIGRANIUM_API_KEY` are still **absent**.
+
+**Unblock now:** copy/create the API key from Figranium Settings on **this** host and set:
+
+- `FIGRANIUM_BASE_URL=https://fig.thesmokeybarrelbar.com`
+- `FIGRANIUM_API_KEY=<key for this host>`
 
 ### Planned control set (not executed)
 

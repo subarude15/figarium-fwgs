@@ -1,6 +1,7 @@
 {
   "phase": "figranium-control-validation",
   "date": "2026-09-02",
+  "retryHost": "https://fig.thesmokeybarrelbar.com",
   "figraniumMcpAuthenticated": false,
   "figraniumExecuted": false,
   "recommendation": "NO-GO",
@@ -9,48 +10,42 @@
   "connectivity": {
     "requestedNamespace": "figranium",
     "namespacePresentInCloudAgent": false,
-    "availableNamespacesSample": [
-      "Browser-use",
-      "Composio",
-      "Wonder",
-      "cursor-cloud"
-    ],
     "wonderMcpStatus": "needsAuth",
-    "wonderAuthAttempt": {
-      "attempted": true,
-      "result": "Interactive MCP authentication is only available in the Cursor desktop IDE. Not available in this Cloud Agent environment."
+    "publicHostProbe": {
+      "baseUrl": "https://fig.thesmokeybarrelbar.com",
+      "reachableFromCloudAgent": true,
+      "httpsHome": "302 → /login",
+      "apiHealth": {
+        "path": "/api/health",
+        "httpStatus": 200,
+        "body": { "status": "ok", "storage": "json" }
+      },
+      "apiTasks": {
+        "path": "/api/tasks",
+        "httpStatus": 401,
+        "body": { "error": "INVALID_API_KEY" },
+        "triedHeaders": [
+          "Authorization: Bearer <prior-key>",
+          "Authorization: <prior-key>",
+          "X-API-Key: <prior-key>",
+          "x-api-key: <prior-key>"
+        ],
+        "note": "Prior key from 192.168.1.2 LAN config is rejected by this host"
+      }
     },
-    "directHttpProbe": {
+    "lanHostProbe": {
       "url": "http://192.168.1.2:11345/",
-      "result": "connect timeout after 5000ms",
       "reachableFromCloudAgent": false,
-      "note": "Private LAN address is not routable from Cursor Cloud Agents"
+      "result": "connect timeout"
     },
     "envSecretsPresent": {
       "FIGRANIUM_BASE_URL": false,
       "FIGRANIUM_API_KEY": false
     },
-    "figraniumMcpPackage": {
-      "name": "figranium-mcp",
-      "version": "1.1.2",
-      "expectedTools": [
-        "create_task",
-        "task_list",
-        "task_execute",
-        "execution_list",
-        "schedule_list",
-        "schedule_get_all_status",
-        "schedule_get_status",
-        "schedule_set",
-        "schedule_delete",
-        "schedule_describe"
-      ],
-      "localNpxProbe": "Exits immediately without FIGRANIUM_API_KEY (expected)"
-    },
-    "blockerSummary": "Cloud Agent has no `figranium` MCP namespace. Desktop ~/.cursor/mcp.json does not apply here. Wonder MCP still needsAuth and cannot be interactively authenticated in Cloud Agents. Previously supplied FIGRANIUM_BASE_URL http://192.168.1.2:11345 is unreachable from this environment."
+    "blockerSummary": "Host fig.thesmokeybarrelbar.com is reachable and healthy, but authentication fails: prior API key returns INVALID_API_KEY on /api/tasks. Cloud Agent still has no figranium MCP namespace and no FIGRANIUM_API_KEY secret for this host."
   },
   "plannedControlSet": {
-    "note": "Not executed — blocked at Phase 1",
+    "note": "Not executed — blocked at Phase 1 auth",
     "cases": [
       {
         "case": 1,
@@ -66,8 +61,7 @@
         "plcbItem": "000009359",
         "expectedName": "Tito's Handmade Vodka",
         "expectedProof": 80,
-        "runsPlanned": 3,
-        "source": "poc/test-matrix.json"
+        "runsPlanned": 3
       },
       {
         "case": 3,
@@ -75,8 +69,7 @@
         "plcbItem": "100056945",
         "expectedName": "Santa Ema El Cruce Select Terroir Sauvignon Blanc",
         "expectedProof": null,
-        "runsPlanned": 3,
-        "source": "poc/test-matrix.json"
+        "runsPlanned": 3
       },
       {
         "case": 4,
@@ -85,16 +78,14 @@
         "expectedName": "Mishka Vodka",
         "expectedProof": 80,
         "volumeNote": "1L package size",
-        "runsPlanned": 3,
-        "source": "poc/test-matrix.json"
+        "runsPlanned": 3
       },
       {
         "case": 5,
         "itemId": "failure-no-result",
         "plcbItem": "999999999",
         "expectNotFound": true,
-        "runsPlanned": 2,
-        "source": "poc/test-matrix.json"
+        "runsPlanned": 2
       }
     ],
     "totalRunsPlanned": 14
@@ -103,29 +94,7 @@
     "name": "FWGS PLCB Product Resolver",
     "status": "not_created",
     "taskId": null,
-    "reason": "create_task unavailable — figranium MCP not connected",
-    "design": {
-      "mode": "scrape",
-      "startingUrl": "https://www.finewineandgoodspirits.com/",
-      "variables": ["plcbItem"],
-      "steps": [
-        "navigate home",
-        "click age gate YES if visible",
-        "navigate /search?Ntt={$plcbItem}",
-        "wait for search results or no-results page",
-        "javascript: count credible product cards; return searchResultCount",
-        "if count===1: click product link",
-        "if count===0: return notFound schema",
-        "if count>1: return ambiguous schema",
-        "javascript: extract PDP fields + imageUrls into exact output schema (no prose)"
-      ],
-      "outputRules": [
-        "Return only the required JSON keys/types",
-        "Use null for missing values",
-        "No free-form prose",
-        "Prefer DOM/JSON-LD extraction over LLM interpretation"
-      ]
-    }
+    "reason": "Cannot call create_task / REST save until a valid API key for this host is provided"
   },
   "metrics": {
     "totalFigraniumRuns": 0,
@@ -141,9 +110,9 @@
     "noResultBehavior": null
   },
   "unblockChecklist": [
-    "Expose Figranium on a Cloud-Agent-reachable URL (tunnel/public host), not 192.168.1.2",
-    "Add Cloud Agent environment secrets: FIGRANIUM_BASE_URL, FIGRANIUM_API_KEY",
-    "Attach custom MCP server `figranium` (`npx -y figranium-mcp`) to the Cloud Agent environment",
-    "Re-run this agent; Phase 1 should succeed on task_list before any matrix runs"
+    "From https://fig.thesmokeybarrelbar.com → Settings → System, copy/create API key for THIS host",
+    "Set Cloud Agent secrets: FIGRANIUM_BASE_URL=https://fig.thesmokeybarrelbar.com and FIGRANIUM_API_KEY=<new key>",
+    "Optionally attach figranium MCP (npx -y figranium-mcp) to the Cloud Agent environment",
+    "Reply here to retry — Phase 1 should then succeed on /api/tasks or task_list"
   ]
 }
