@@ -100,16 +100,22 @@ Expose runtime variable: `plcbItem`.
 
 See `poc/test-matrix.json`.
 
-## Phase-2 / Phase-3 connectivity note
-
-As of 2026-09-02 (Cloud Agent re-check for Figranium control validation):
+## Phase-3 Figranium control note (2026-09-02)
 
 | Path | Status |
 | --- | --- |
 | `figranium` MCP namespace | **Not present** in Cloud Agent catalog |
-| Wonder MCP namespace | `needsAuth` — interactive OAuth desktop-only |
-| Desktop `~/.cursor/mcp.json` | Does **not** apply to Cloud Agents |
-| `FIGRANIUM_BASE_URL` + `FIGRANIUM_API_KEY` | Not present in Cloud Agent env |
-| Direct probe `http://192.168.1.2:11345` | Connect timeout from Cloud Agent |
+| `@figranium/sdk` HTTP | **Works** against `https://fig.thesmokeybarrelbar.com` with valid API key |
+| Saved task | `task_1788365630737` — **FWGS PLCB Product Resolver** |
+| Control set | 12/12 product matchOk, 2/2 no-result, 0 FP; images **0/12** |
+
+### Task design that works
+
+1. `navigate` → `search?Ntt={$plcbItem}`
+2. dismiss age/store buttons via `javascript`
+3. `navigate` → `{$pdpUrl}` where client sets `/product/{plcb}` (or search URL for no-result)
+4. `extract` with `includeShadowDom: true`, parsing `$$data.shadowText()` CSV tokens
+
+Do **not** rely on in-page `location.href` to open PDPs — Figranium often leaves extraction on the SERP.
 
 See `poc/figranium-validation.json`. Do **not** silently fall back to Composio when validating Figranium. Fallback runs (if any) must set `"executionEngine": "fallback"`.

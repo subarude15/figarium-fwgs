@@ -3,116 +3,84 @@
   "date": "2026-09-02",
   "retryHost": "https://fig.thesmokeybarrelbar.com",
   "figraniumMcpAuthenticated": false,
-  "figraniumExecuted": false,
-  "recommendation": "NO-GO",
-  "stoppedAt": "PHASE_1_VERIFY_FIGRANIUM",
+  "figraniumExecuted": true,
+  "executionInterface": "figranium-sdk-http (@figranium/sdk against live host; no figranium MCP in Cloud Agent)",
+  "taskId": "task_1788365630737",
+  "taskName": "FWGS PLCB Product Resolver",
+  "recommendation": "CONDITIONAL GO",
+  "recommendationRationale": [
+    "14/14 control intents completed after one Cloudflare 524 retry on no-result run 2",
+    "100% schema compliance on successful runs; product matchOk 12/12; no-result 2/2 after retry; 0 false positives",
+    "Captain Morgan name+proof stable 3/3 (proof=70)",
+    "GAP: primaryImageUrl/imageUrls always empty — product images absent from Figranium extraction DOM/shadowText/cleaned HTML",
+    "GAP: volumeText occasionally missing (1/12 product runs); brand/category/country available in shadowText but not yet asserted in all stdout summaries",
+    "GAP: PDP open requires actions.navigate to /product/{plcb} after search — in-page location.href does not advance Figranium page state",
+    "GAP: Cloudflare 524 risk when origin >120s; keep waits short",
+    "No silent Composio fallback used"
+  ],
   "silentFallbackUsed": false,
   "connectivity": {
     "requestedNamespace": "figranium",
     "namespacePresentInCloudAgent": false,
-    "wonderMcpStatus": "needsAuth",
     "publicHostProbe": {
       "baseUrl": "https://fig.thesmokeybarrelbar.com",
       "reachableFromCloudAgent": true,
-      "httpsHome": "302 → /login",
       "apiHealth": {
         "path": "/api/health",
-        "httpStatus": 200,
-        "body": { "status": "ok", "storage": "json" }
+        "httpStatus": 200
       },
-      "apiTasks": {
-        "path": "/api/tasks",
-        "httpStatus": 401,
-        "body": { "error": "INVALID_API_KEY" },
-        "triedHeaders": [
-          "Authorization: Bearer <prior-key>",
-          "Authorization: <prior-key>",
-          "X-API-Key: <prior-key>",
-          "x-api-key: <prior-key>"
-        ],
-        "note": "Prior key from 192.168.1.2 LAN config is rejected by this host"
-      }
-    },
-    "lanHostProbe": {
-      "url": "http://192.168.1.2:11345/",
-      "reachableFromCloudAgent": false,
-      "result": "connect timeout"
+      "apiAuth": "FIGRANIUM_API_KEY accepted (env; not committed)"
     },
     "envSecretsPresent": {
-      "FIGRANIUM_BASE_URL": false,
-      "FIGRANIUM_API_KEY": false
-    },
-    "blockerSummary": "Host fig.thesmokeybarrelbar.com is reachable and healthy, but authentication fails: prior API key returns INVALID_API_KEY on /api/tasks. Cloud Agent still has no figranium MCP namespace and no FIGRANIUM_API_KEY secret for this host."
-  },
-  "plannedControlSet": {
-    "note": "Not executed — blocked at Phase 1 auth",
-    "cases": [
-      {
-        "case": 1,
-        "itemId": "spirit-captain-morgan-175l",
-        "plcbItem": "000004766",
-        "expectedName": "Captain Morgan Original Spiced Rum",
-        "expectedProof": 70,
-        "runsPlanned": 3
-      },
-      {
-        "case": 2,
-        "itemId": "spirit-titos-750ml",
-        "plcbItem": "000009359",
-        "expectedName": "Tito's Handmade Vodka",
-        "expectedProof": 80,
-        "runsPlanned": 3
-      },
-      {
-        "case": 3,
-        "itemId": "wine-santa-ema-sauv-blanc",
-        "plcbItem": "100056945",
-        "expectedName": "Santa Ema El Cruce Select Terroir Sauvignon Blanc",
-        "expectedProof": null,
-        "runsPlanned": 3
-      },
-      {
-        "case": 4,
-        "itemId": "spirit-mishka-1l",
-        "plcbItem": "000098661",
-        "expectedName": "Mishka Vodka",
-        "expectedProof": 80,
-        "volumeNote": "1L package size",
-        "runsPlanned": 3
-      },
-      {
-        "case": 5,
-        "itemId": "failure-no-result",
-        "plcbItem": "999999999",
-        "expectNotFound": true,
-        "runsPlanned": 2
-      }
-    ],
-    "totalRunsPlanned": 14
-  },
-  "savedTaskDraft": {
-    "name": "FWGS PLCB Product Resolver",
-    "status": "not_created",
-    "taskId": null,
-    "reason": "Cannot call create_task / REST save until a valid API key for this host is provided"
+      "FIGRANIUM_BASE_URL": true,
+      "FIGRANIUM_API_KEY": true
+    }
   },
   "metrics": {
-    "totalFigraniumRuns": 0,
-    "schemaComplianceRate": null,
-    "productMatchRate": null,
-    "falsePositiveCount": null,
-    "captainMorganStability": null,
-    "primaryImageStability": null,
-    "proofStability": null,
-    "captchaLoginCount": null,
-    "averageRuntimeMs": null,
-    "selectorFailures": [],
-    "noResultBehavior": null
+    "totalFigraniumRuns": 14,
+    "schemaComplianceRate": 1,
+    "productMatchRate": 1,
+    "falsePositiveCount": 0,
+    "captainMorganStability": "3/3",
+    "primaryImageStability": "0/12",
+    "proofStability": {
+      "captainMorgan": [
+        70,
+        70,
+        70
+      ],
+      "titos": [
+        80,
+        80,
+        80
+      ],
+      "mishka": [
+        80,
+        80,
+        80
+      ]
+    },
+    "captchaLoginCount": 0,
+    "averageRuntimeMs": 56255,
+    "cloudflare524Count": 1,
+    "noResultBehavior": [
+      {
+        "run": 1,
+        "matchOk": true,
+        "notFound": true,
+        "outcome": "success"
+      },
+      {
+        "run": 2,
+        "matchOk": true,
+        "notFound": true,
+        "outcome": "success"
+      }
+    ]
   },
-  "unblockChecklist": [
-    "From https://fig.thesmokeybarrelbar.com → Settings → System, copy/create API key for THIS host",
-    "Set Cloud Agent secrets: FIGRANIUM_BASE_URL=https://fig.thesmokeybarrelbar.com and FIGRANIUM_API_KEY=<new key>",
-    "Optionally attach figranium MCP (npx -y figranium-mcp) to the Cloud Agent environment",
-    "Reply here to retry — Phase 1 should then succeed on /api/tasks or task_list"
+  "gaps": [
+    "Product bottle images not present in Figranium extraction sandbox (cleaned HTML + shadowText + light DOM img tags)",
+    "Must use actions.navigate to constructed /product/{plcbItem} URL; SERP click via location.href unreliable",
+    "Occasional CF 524 on longer runs (~120s proxy timeout)"
   ]
 }

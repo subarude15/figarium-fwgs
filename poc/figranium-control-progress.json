@@ -11,7 +11,7 @@
     "taskId": "task_1788365630737",
     "outcome": "success",
     "finalUrl": "https://www.finewineandgoodspirits.com/search?Ntt=999999999",
-    "durationClientMs": 41431,
+    "durationClientMs": 119767,
     "logs": [
       "Navigating to: https://www.finewineandgoodspirits.com/search?Ntt=999999999",
       "Waiting: 4000ms",
@@ -22,7 +22,7 @@
       "Running custom JavaScript...",
       "Waiting: 1000ms"
     ],
-    "screenshotUrl": "/captures/run_1788368458749_unknown_agent_1788368497112.png",
+    "screenshotUrl": "/captures/run_1788369375913_unknown_agent_1788369482456.png",
     "result": {
       "matched": false,
       "ambiguous": false,
@@ -45,7 +45,7 @@
         "captchaSeen": false,
         "loginRequired": false,
         "selectorFailures": [],
-        "durationMs": 41431
+        "durationMs": 119767
       }
     },
     "schemaCompliant": true,
