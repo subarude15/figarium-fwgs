@@ -1,0 +1,124 @@
+{
+  "taskName": "FWGS PLCB Product Resolver",
+  "browserSessionId": "253b0d07-ea31-4b92-8699-5160899ef3cb",
+  "liveUrl": "https://live.browser-use.com?wss=https%3A%2F%2F253b0d07-ea31-4b92-8699-5160899ef3cb.cdp.browser-use.com",
+  "runtime": "Composio BROWSER_TOOL (Browser Use cloud session)",
+  "testPlcbItem": "000004766",
+  "expectedProduct": "Captain Morgan Original Spiced Rum",
+  "expectedProof": 70,
+  "runs": [
+    {
+      "run": 1,
+      "watchTaskId": "37e19179-202f-410c-ac6f-8b17791a89cc",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 6,
+      "notes": [
+        "Age gate YES clicked",
+        "Search via /search?Ntt=000004766",
+        "Exactly one product result",
+        "No CAPTCHA observed",
+        "Search box noted inside shadow DOM; agent used direct search URL"
+      ],
+      "result": {
+        "matched": true,
+        "ambiguous": false,
+        "plcbItem": "000004766",
+        "productUrl": "https://www.finewineandgoodspirits.com/captain-morgan-original-spiced-rum/product/000004766",
+        "name": "Captain Morgan Original Spiced Rum",
+        "brand": "Captain Morgan",
+        "proof": 70,
+        "volumeText": "1.75L",
+        "category": "Rum",
+        "country": "United States",
+        "region": null,
+        "imageUrls": [
+          "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v4181866484679415500/products/000004766_1003007_F1.jpg&height=475&width=475",
+          "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v7401459619033620653/products/000004766_1003007_B1.jpg&height=475&width=475"
+        ],
+        "evidence": {
+          "plcbItemMatched": true,
+          "nameMatched": true
+        }
+      }
+    },
+    {
+      "run": 2,
+      "watchTaskId": "dfa7280a-ad99-4bfd-8eae-421a4b1c8caa",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 1,
+      "notes": [
+        "Reused persistent session already on product page",
+        "Did not re-run search path",
+        "No CAPTCHA observed",
+        "Same metadata as run 1"
+      ],
+      "result": {
+        "matched": true,
+        "ambiguous": false,
+        "plcbItem": "000004766",
+        "productUrl": "https://www.finewineandgoodspirits.com/captain-morgan-original-spiced-rum/product/000004766",
+        "name": "Captain Morgan Original Spiced Rum",
+        "brand": "Captain Morgan",
+        "proof": 70,
+        "volumeText": "1.75L",
+        "category": "Rum",
+        "country": "United States",
+        "region": null,
+        "imageUrls": [
+          "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v4181866484679415500/products/000004766_1003007_F1.jpg&height=475&width=475",
+          "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v7401459619033620653/products/000004766_1003007_B1.jpg&height=475&width=475"
+        ],
+        "evidence": {
+          "plcbItemMatched": true,
+          "nameMatched": true
+        }
+      }
+    },
+    {
+      "run": 3,
+      "watchTaskId": "24d9003b-e8d9-49ac-9247-52c7ac55bad8",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 6,
+      "notes": [
+        "Forced fresh home -> search -> product flow",
+        "Age gate skipped due to session cookies",
+        "Search box used successfully; result count 1-1 of 1",
+        "No CAPTCHA observed",
+        "Same metadata as runs 1 and 2"
+      ],
+      "result": {
+        "matched": true,
+        "ambiguous": false,
+        "plcbItem": "000004766",
+        "productUrl": "https://www.finewineandgoodspirits.com/captain-morgan-original-spiced-rum/product/000004766",
+        "name": "Captain Morgan Original Spiced Rum",
+        "brand": "Captain Morgan",
+        "proof": 70,
+        "volumeText": "1.75L",
+        "category": "Rum",
+        "country": "United States",
+        "region": null,
+        "imageUrls": [
+          "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v4181866484679415500/products/000004766_1003007_F1.jpg&height=475&width=475",
+          "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v7401459619033620653/products/000004766_1003007_B1.jpg&height=475&width=475"
+        ],
+        "evidence": {
+          "plcbItemMatched": true,
+          "nameMatched": true
+        }
+      }
+    }
+  ],
+  "reliabilitySummary": {
+    "runsCompleted": 3,
+    "matchedCount": 3,
+    "sameProductUrlAllRuns": true,
+    "proofConsistent": true,
+    "imageUrlsStable": true,
+    "captchaObserved": false,
+    "loginRequired": false
+  }
+}
