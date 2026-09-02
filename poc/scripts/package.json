@@ -1,0 +1,9 @@
+{
+  "name": "fwgs-figranium-poc-scripts",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Figranium control-set runners for FWGS PLCB Product Resolver PoC",
+  "dependencies": {
+    "@figranium/sdk": "0.1.2"
+  }
+}
