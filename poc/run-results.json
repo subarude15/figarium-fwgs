@@ -1,62 +1,108 @@
 {
   "taskName": "FWGS PLCB Product Resolver",
-  "browserSessionId": "253b0d07-ea31-4b92-8699-5160899ef3cb",
-  "liveUrl": "https://live.browser-use.com?wss=https%3A%2F%2F253b0d07-ea31-4b92-8699-5160899ef3cb.cdp.browser-use.com",
-  "runtime": "Composio BROWSER_TOOL (Browser Use cloud session)",
-  "testPlcbItem": "000004766",
-  "expectedProduct": "Captain Morgan Original Spiced Rum",
-  "expectedProof": 70,
+  "version": 2,
+  "executionEngineRequested": "figranium",
+  "executionEngineActual": "fallback",
+  "figraniumValidated": false,
+  "figraniumControlValidation": {
+    "date": "2026-09-02",
+    "artifact": "poc/figranium-validation.json",
+    "figraniumRuns": 0,
+    "stoppedAt": "PHASE_1_VERIFY_FIGRANIUM",
+    "silentFallbackUsed": false
+  },
+  "figraniumConnectivity": {
+    "available": false,
+    "blocker": "Cloud Agent has no `figranium` MCP namespace. Desktop ~/.cursor/mcp.json does not apply. Wonder MCP needsAuth and interactive OAuth is desktop-only. Direct probe to http://192.168.1.2:11345 times out from Cloud Agents. FIGRANIUM_BASE_URL/FIGRANIUM_API_KEY secrets absent.",
+    "requiredConfiguration": [
+      "Expose Figranium on a Cloud-Agent-reachable URL (not a private LAN IP)",
+      "Add Cloud Agent secrets FIGRANIUM_BASE_URL and FIGRANIUM_API_KEY",
+      "Attach custom MCP server figranium (npx -y figranium-mcp) to the Cloud Agent environment",
+      "Re-run agent and confirm task_list before create_task / control-set execution"
+    ]
+  },
+  "fallbackRuntime": "Composio BROWSER_TOOL (Browser Use cloud)",
+  "testMatrixSource": "poc/test-matrix.json",
+  "summary": {
+    "itemsInMatrix": 15,
+    "productItems": 12,
+    "failureCases": 3,
+    "totalRuns": 21,
+    "figraniumRuns": 0,
+    "fallbackRuns": 21,
+    "matchedProductRuns": 17,
+    "matchRateAmongProductRuns": 1.0,
+    "falsePositiveCount": 0,
+    "notFoundCorrectCount": 2,
+    "ambiguousCount": 0,
+    "captchaObservedCount": 0,
+    "loginRequiredCount": 0,
+    "schemaFullyCompliantRuns": 1,
+    "averageStepsPerRun": 4.8,
+    "captainMorganRuns": 3,
+    "captainMorganProductUrlStable": true,
+    "captainMorganProofStable": true,
+    "captainMorganImageUrlsStable": true,
+    "itemsWithTwoOrMoreRuns": 5,
+    "itemsWithOnlyOneRun": 10
+  },
   "runs": [
     {
+      "itemId": "spirit-captain-morgan-175l",
+      "plcbItem": "000004766",
       "run": 1,
+      "executionEngine": "fallback",
+      "phase": 1,
       "watchTaskId": "37e19179-202f-410c-ac6f-8b17791a89cc",
+      "browserSessionId": "253b0d07-ea31-4b92-8699-5160899ef3cb",
       "status": "finished",
       "isSuccess": true,
       "steps": 6,
-      "notes": [
-        "Age gate YES clicked",
-        "Search via /search?Ntt=000004766",
-        "Exactly one product result",
-        "No CAPTCHA observed",
-        "Search box noted inside shadow DOM; agent used direct search URL"
-      ],
+      "durationEstimateSec": 35,
+      "schemaCompliant": false,
       "result": {
         "matched": true,
         "ambiguous": false,
+        "notFound": false,
+        "executionEngine": "fallback",
         "plcbItem": "000004766",
         "productUrl": "https://www.finewineandgoodspirits.com/captain-morgan-original-spiced-rum/product/000004766",
         "name": "Captain Morgan Original Spiced Rum",
         "brand": "Captain Morgan",
         "proof": 70,
+        "abv": null,
         "volumeText": "1.75L",
         "category": "Rum",
+        "subcategory": null,
         "country": "United States",
         "region": null,
         "imageUrls": [
           "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v4181866484679415500/products/000004766_1003007_F1.jpg&height=475&width=475",
           "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v7401459619033620653/products/000004766_1003007_B1.jpg&height=475&width=475"
         ],
-        "evidence": {
-          "plcbItemMatched": true,
-          "nameMatched": true
-        }
+        "primaryImageUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v4181866484679415500/products/000004766_1003007_F1.jpg&height=475&width=475",
+        "evidence": { "plcbItemMatched": true, "nameMatched": true, "upcMatched": null, "proofMatched": true },
+        "diagnostics": { "searchResultCount": 1, "selectorFailures": [], "captchaSeen": false, "loginRequired": false, "redirected": false, "durationMs": null }
       }
     },
     {
+      "itemId": "spirit-captain-morgan-175l",
+      "plcbItem": "000004766",
       "run": 2,
+      "executionEngine": "fallback",
+      "phase": 1,
       "watchTaskId": "dfa7280a-ad99-4bfd-8eae-421a4b1c8caa",
+      "browserSessionId": "253b0d07-ea31-4b92-8699-5160899ef3cb",
       "status": "finished",
       "isSuccess": true,
       "steps": 1,
-      "notes": [
-        "Reused persistent session already on product page",
-        "Did not re-run search path",
-        "No CAPTCHA observed",
-        "Same metadata as run 1"
-      ],
+      "schemaCompliant": false,
+      "notes": ["Reused session already on PDP; did not re-run search"],
       "result": {
         "matched": true,
         "ambiguous": false,
+        "notFound": false,
+        "executionEngine": "fallback",
         "plcbItem": "000004766",
         "productUrl": "https://www.finewineandgoodspirits.com/captain-morgan-original-spiced-rum/product/000004766",
         "name": "Captain Morgan Original Spiced Rum",
@@ -65,33 +111,32 @@
         "volumeText": "1.75L",
         "category": "Rum",
         "country": "United States",
-        "region": null,
         "imageUrls": [
           "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v4181866484679415500/products/000004766_1003007_F1.jpg&height=475&width=475",
           "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v7401459619033620653/products/000004766_1003007_B1.jpg&height=475&width=475"
         ],
-        "evidence": {
-          "plcbItemMatched": true,
-          "nameMatched": true
-        }
+        "primaryImageUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v4181866484679415500/products/000004766_1003007_F1.jpg&height=475&width=475",
+        "evidence": { "plcbItemMatched": true, "nameMatched": true, "proofMatched": true }
       }
     },
     {
+      "itemId": "spirit-captain-morgan-175l",
+      "plcbItem": "000004766",
       "run": 3,
+      "executionEngine": "fallback",
+      "phase": 1,
       "watchTaskId": "24d9003b-e8d9-49ac-9247-52c7ac55bad8",
+      "browserSessionId": "253b0d07-ea31-4b92-8699-5160899ef3cb",
       "status": "finished",
       "isSuccess": true,
       "steps": 6,
-      "notes": [
-        "Forced fresh home -> search -> product flow",
-        "Age gate skipped due to session cookies",
-        "Search box used successfully; result count 1-1 of 1",
-        "No CAPTCHA observed",
-        "Same metadata as runs 1 and 2"
-      ],
+      "schemaCompliant": false,
+      "notes": ["Forced fresh home -> search -> product flow"],
       "result": {
         "matched": true,
         "ambiguous": false,
+        "notFound": false,
+        "executionEngine": "fallback",
         "plcbItem": "000004766",
         "productUrl": "https://www.finewineandgoodspirits.com/captain-morgan-original-spiced-rum/product/000004766",
         "name": "Captain Morgan Original Spiced Rum",
@@ -100,25 +145,502 @@
         "volumeText": "1.75L",
         "category": "Rum",
         "country": "United States",
-        "region": null,
         "imageUrls": [
           "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v4181866484679415500/products/000004766_1003007_F1.jpg&height=475&width=475",
           "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v7401459619033620653/products/000004766_1003007_B1.jpg&height=475&width=475"
         ],
-        "evidence": {
-          "plcbItemMatched": true,
-          "nameMatched": true
-        }
+        "primaryImageUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v4181866484679415500/products/000004766_1003007_F1.jpg&height=475&width=475",
+        "evidence": { "plcbItemMatched": true, "nameMatched": true, "proofMatched": true }
       }
+    },
+    {
+      "itemId": "spirit-titos-750ml",
+      "plcbItem": "000009359",
+      "run": 1,
+      "executionEngine": "fallback",
+      "phase": 2,
+      "watchTaskId": "46e2dd20-8a0a-490e-981a-08de86759b1f",
+      "browserSessionId": "a1a5b658-b599-4f73-88b6-09431bf7058d",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 6,
+      "schemaCompliant": true,
+      "result": {
+        "matched": true,
+        "ambiguous": false,
+        "notFound": false,
+        "executionEngine": "fallback",
+        "plcbItem": "000009359",
+        "productUrl": "https://www.finewineandgoodspirits.com/titos-handmade-vodka/product/000009359",
+        "name": "Tito's Handmade Vodka",
+        "brand": "Tito's",
+        "proof": 80,
+        "abv": null,
+        "volumeText": "750ML",
+        "category": "Vodka",
+        "subcategory": null,
+        "country": "United States",
+        "region": null,
+        "imageUrls": ["https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v8267655237597476021/products/000009359_F1.jpg&height=475&width=475"],
+        "primaryImageUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v8267655237597476021/products/000009359_F1.jpg&height=475&width=475",
+        "evidence": { "plcbItemMatched": true, "nameMatched": true, "upcMatched": null, "proofMatched": true },
+        "diagnostics": { "searchResultCount": 1, "selectorFailures": [], "captchaSeen": false, "loginRequired": false, "redirected": false, "durationMs": null }
+      }
+    },
+    {
+      "itemId": "spirit-titos-750ml",
+      "plcbItem": "000009359",
+      "run": 2,
+      "executionEngine": "fallback",
+      "phase": 2,
+      "watchTaskId": "eb3ffe9a-6641-488c-b1ed-7d5b8263a693",
+      "browserSessionId": "49ad5081-2e64-4b81-9fdd-dcddb8a41400",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 6,
+      "schemaCompliant": false,
+      "result": {
+        "matched": true,
+        "executionEngine": "fallback",
+        "plcbItem": "000009359",
+        "productUrl": "https://www.finewineandgoodspirits.com/titos-handmade-vodka/product/000009359",
+        "name": "Tito's Handmade Vodka",
+        "brand": "Tito's",
+        "proof": 80,
+        "volumeText": "750 mL",
+        "category": "Vodka",
+        "country": "United States",
+        "primaryImageUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v8267655237597476021/products/000009359_F1.jpg&height=475&width=475"
+      }
+    },
+    {
+      "itemId": "spirit-smirnoff-rwb",
+      "plcbItem": "000001290",
+      "run": 1,
+      "executionEngine": "fallback",
+      "phase": 2,
+      "watchTaskId": "4d2e8a87-308f-41a2-b475-522925e8b0a6",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 6,
+      "schemaCompliant": false,
+      "result": {
+        "matched": true,
+        "executionEngine": "fallback",
+        "plcbItem": "000001290",
+        "productUrl": "https://www.finewineandgoodspirits.com/smirnoff-red-white-and-berry-vodka/product/000001290",
+        "name": "Smirnoff Red White and Berry Vodka",
+        "proof": 60
+      }
+    },
+    {
+      "itemId": "spirit-smirnoff-rwb",
+      "plcbItem": "000001290",
+      "run": 2,
+      "executionEngine": "fallback",
+      "phase": 2,
+      "watchTaskId": "fa4556cf-11f4-4205-80d3-65e5978559b9",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 5,
+      "schemaCompliant": false,
+      "result": {
+        "matched": true,
+        "executionEngine": "fallback",
+        "plcbItem": "000001290",
+        "productUrl": "https://www.finewineandgoodspirits.com/smirnoff-red-white-and-berry-vodka/product/000001290",
+        "name": "Smirnoff Red White and Berry Vodka",
+        "brand": "Smirnoff",
+        "proof": 60,
+        "volumeText": "750ML",
+        "category": "Vodka",
+        "country": "United States"
+      }
+    },
+    {
+      "itemId": "spirit-palmers-gin",
+      "plcbItem": "000009436",
+      "run": 1,
+      "executionEngine": "fallback",
+      "phase": 2,
+      "watchTaskId": "271249cd-5870-4928-907d-9205aa698b75",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 5,
+      "schemaCompliant": false,
+      "notes": ["First attempt stuck in queue; retried successfully"],
+      "result": {
+        "matched": true,
+        "executionEngine": "fallback",
+        "plcbItem": "000009436",
+        "productUrl": "https://www.finewineandgoodspirits.com/palmers-liberty-gin/product/000009436",
+        "name": "Palmer's Liberty Gin",
+        "brand": "W P Palmer",
+        "volumeText": "750ML",
+        "proof": null
+      }
+    },
+    {
+      "itemId": "spirit-mishka-1l",
+      "plcbItem": "000098661",
+      "run": 1,
+      "executionEngine": "fallback",
+      "phase": 2,
+      "watchTaskId": "3da5063e-2a28-4167-ad15-5eac4a7274cc",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 3,
+      "schemaCompliant": false,
+      "result": {
+        "matched": true,
+        "executionEngine": "fallback",
+        "plcbItem": "000098661",
+        "productUrl": "https://www.finewineandgoodspirits.com/mishka-vodka/product/000098661",
+        "name": "Mishka Vodka",
+        "brand": "Mishka",
+        "proof": 80,
+        "volumeText": "1L",
+        "category": "Vodka",
+        "country": "United States"
+      }
+    },
+    {
+      "itemId": "spirit-mishka-1l",
+      "plcbItem": "000098661",
+      "run": 2,
+      "executionEngine": "fallback",
+      "phase": 2,
+      "watchTaskId": "48ad7b0a-8ec9-4d6d-8813-7a144cbd8636",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 5,
+      "schemaCompliant": false,
+      "result": {
+        "matched": true,
+        "executionEngine": "fallback",
+        "plcbItem": "000098661",
+        "productUrl": "https://www.finewineandgoodspirits.com/mishka-vodka/product/000098661",
+        "name": "Mishka Vodka",
+        "proof": 80,
+        "volumeText": "1L"
+      }
+    },
+    {
+      "itemId": "spirit-horse-soldier-bourbon",
+      "plcbItem": "000088484",
+      "run": 1,
+      "executionEngine": "fallback",
+      "phase": 2,
+      "watchTaskId": "b853c762-50b6-46ec-b602-3aeb66f16f3b",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 5,
+      "schemaCompliant": false,
+      "result": {
+        "matched": true,
+        "executionEngine": "fallback",
+        "plcbItem": "000088484",
+        "productUrl": "https://www.finewineandgoodspirits.com/horse-soldier-small-batch-bourbon/product/000088484",
+        "name": "Horse Soldier Small Batch Bourbon",
+        "brand": "Horse Soldier",
+        "proof": 95,
+        "volumeText": "750ML",
+        "category": "Whiskey",
+        "country": "United States"
+      }
+    },
+    {
+      "itemId": "spirit-limoncello",
+      "plcbItem": "000006331",
+      "run": 1,
+      "executionEngine": "fallback",
+      "phase": 2,
+      "watchTaskId": "df63f8db-8821-4533-894b-d3dda1de558b",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 5,
+      "schemaCompliant": false,
+      "result": {
+        "matched": true,
+        "executionEngine": "fallback",
+        "plcbItem": "000006331",
+        "productUrl": "https://www.finewineandgoodspirits.com/caravella-limoncello/product/000006331",
+        "name": "Caravella Limoncello",
+        "brand": "Caravella",
+        "proof": 56,
+        "volumeText": "750ML",
+        "category": "Cordials & Liqueurs",
+        "country": "Italy"
+      }
+    },
+    {
+      "itemId": "wine-santa-ema-sauv-blanc",
+      "plcbItem": "100056945",
+      "run": 1,
+      "executionEngine": "fallback",
+      "phase": 2,
+      "watchTaskId": "17b391ac-0612-41e2-9e1b-2f6b972fe60b",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 14,
+      "schemaCompliant": false,
+      "result": {
+        "matched": true,
+        "executionEngine": "fallback",
+        "plcbItem": "100056945",
+        "productUrl": "https://www.finewineandgoodspirits.com/santa-ema-el-cruce-select-terroir-sauvignon-blanc-maipo-valley/product/100056945",
+        "name": "Santa Ema El Cruce Select Terroir Sauvignon Blanc Maipo Valley",
+        "brand": "Santa Ema",
+        "proof": null,
+        "abv": null,
+        "volumeText": "750ML",
+        "category": "Sauvignon Blanc",
+        "country": "Chile"
+      },
+      "notes": ["ABV not listed on FWGS PDP; agent did not use off-site search in this run"]
+    },
+    {
+      "itemId": "wine-santa-ema-sauv-blanc",
+      "plcbItem": "100056945",
+      "run": 2,
+      "executionEngine": "fallback",
+      "phase": 2,
+      "watchTaskId": "4f44a408-bb90-4ac9-9ce1-937bfff54a6a",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 6,
+      "schemaCompliant": false,
+      "result": {
+        "matched": true,
+        "executionEngine": "fallback",
+        "plcbItem": "100056945",
+        "productUrl": "https://www.finewineandgoodspirits.com/santa-ema-el-cruce-select-terroir-sauvignon-blanc-maipo-valley/product/100056945",
+        "name": "Santa Ema El Cruce Select Terroir Sauvignon Blanc Maipo Valley",
+        "brand": "Santa Ema",
+        "volumeText": "750ML",
+        "country": "Chile",
+        "region": "Chile - Central Valley - Maipo Valley"
+      }
+    },
+    {
+      "itemId": "wine-korbel-brut",
+      "plcbItem": "100059831",
+      "run": 1,
+      "executionEngine": "fallback",
+      "phase": 2,
+      "watchTaskId": "95c22cbe-4eb6-4745-8d0d-0a72caa70c0b",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 5,
+      "schemaCompliant": false,
+      "result": {
+        "matched": true,
+        "executionEngine": "fallback",
+        "plcbItem": "100059831",
+        "productUrl": "https://www.finewineandgoodspirits.com/korbel-brut-california-champagne-3x187-ml/product/100059831",
+        "name": "Korbel Brut California Champagne 3x187 mL",
+        "brand": "Korbel",
+        "proof": null,
+        "abv": null,
+        "volumeText": "561ML",
+        "country": "United States",
+        "region": "California - Other"
+      }
+    },
+    {
+      "itemId": "wine-educated-guess-chardonnay",
+      "plcbItem": "100051387",
+      "run": 1,
+      "executionEngine": "fallback",
+      "phase": 2,
+      "watchTaskId": "fe4ba7c5-9dbb-44b1-a89c-648ae35f0a4b",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 5,
+      "schemaCompliant": false,
+      "result": {
+        "matched": true,
+        "executionEngine": "fallback",
+        "plcbItem": "100051387",
+        "productUrl": "https://www.finewineandgoodspirits.com/educated-guess-reserve-chardonnay-napa-valley-2023/product/100051387",
+        "name": "Educated Guess Reserve Chardonnay Napa Valley 2023",
+        "proof": null,
+        "abv": null,
+        "volumeText": null,
+        "region": "California - North Coast - Napa Valley"
+      }
+    },
+    {
+      "itemId": "wine-zweigelt",
+      "plcbItem": "100042845",
+      "run": 1,
+      "executionEngine": "fallback",
+      "phase": 2,
+      "watchTaskId": "f78cf94c-6a6d-4a63-8c6d-a3823bd54d31",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 4,
+      "schemaCompliant": false,
+      "result": {
+        "matched": true,
+        "executionEngine": "fallback",
+        "plcbItem": "100042845",
+        "productUrl": "https://www.finewineandgoodspirits.com/winzer-krems-classic-blauer-zweigelt-trocken-niederosterreich-2023/product/100042845",
+        "name": "Winzer Krems Classic Blauer Zweigelt Trocken Niederosterreich 2023",
+        "brand": "Winzer Krems",
+        "proof": null,
+        "abv": null,
+        "volumeText": "750ML",
+        "country": "Austria",
+        "region": "Austria - Niederosterreich"
+      }
+    },
+    {
+      "itemId": "spirit-battlefield-vodka-pa",
+      "plcbItem": "000009986",
+      "run": 1,
+      "executionEngine": "fallback",
+      "phase": 2,
+      "watchTaskId": "3f6dfec9-b3c2-4d94-8c4d-99d625a1e80e",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 3,
+      "schemaCompliant": false,
+      "result": {
+        "matched": true,
+        "executionEngine": "fallback",
+        "plcbItem": "000009986",
+        "productUrl": "https://www.finewineandgoodspirits.com/old-republic-distillery-battlefield-vodka/product/000009986",
+        "name": "Old Republic Distillery Battlefield Vodka",
+        "brand": "Old Republic Distillery",
+        "proof": 80,
+        "volumeText": "750ML",
+        "category": "Vodka",
+        "country": "United States"
+      }
+    },
+    {
+      "itemId": "failure-no-result",
+      "plcbItem": "999999999",
+      "run": 1,
+      "executionEngine": "fallback",
+      "phase": 2,
+      "watchTaskId": "21f0fec8-36df-4c1b-a1e1-269e82703091",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 2,
+      "schemaCompliant": false,
+      "result": {
+        "matched": false,
+        "ambiguous": false,
+        "notFound": true,
+        "executionEngine": "fallback",
+        "plcbItem": "999999999",
+        "productUrl": null,
+        "name": null,
+        "evidence": { "plcbItemMatched": false },
+        "diagnostics": { "searchResultCount": 0, "captchaSeen": false, "loginRequired": false }
+      }
+    },
+    {
+      "itemId": "failure-malformed",
+      "plcbItem": "ABC123",
+      "run": 1,
+      "executionEngine": "fallback",
+      "phase": 2,
+      "watchTaskId": "55a981ed-7384-495a-9a25-08acf8207316",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 2,
+      "schemaCompliant": false,
+      "result": {
+        "matched": false,
+        "ambiguous": false,
+        "notFound": true,
+        "executionEngine": "fallback",
+        "plcbItem": "ABC123",
+        "productUrl": null,
+        "name": null
+      }
+    },
+    {
+      "itemId": "failure-unpadded",
+      "plcbItem": "4766",
+      "run": 1,
+      "executionEngine": "fallback",
+      "phase": 2,
+      "watchTaskId": "5864b056-192d-41f4-ab1f-f43d9e4f1868",
+      "status": "finished",
+      "isSuccess": true,
+      "steps": 5,
+      "schemaCompliant": false,
+      "result": {
+        "matched": true,
+        "ambiguous": false,
+        "notFound": false,
+        "executionEngine": "fallback",
+        "plcbItem": "4766",
+        "productUrl": "https://www.finewineandgoodspirits.com/captain-morgan-original-spiced-rum/product/000004766",
+        "name": "Captain Morgan Original Spiced Rum",
+        "proof": null,
+        "evidence": { "plcbItemMatched": true, "nameMatched": true }
+      },
+      "notes": ["FWGS search accepts unpadded 4766 and resolves to padded item 000004766 on PDP"]
     }
   ],
-  "reliabilitySummary": {
-    "runsCompleted": 3,
-    "matchedCount": 3,
-    "sameProductUrlAllRuns": true,
-    "proofConsistent": true,
-    "imageUrlsStable": true,
-    "captchaObserved": false,
-    "loginRequired": false
+  "reliabilityAnalysis": {
+    "productUrlStability": {
+      "itemsWithMultipleRuns": ["000004766", "000009359", "000001290", "000098661", "100056945"],
+      "allStable": true,
+      "details": "Captain Morgan, Tito's, Smirnoff, Mishka, and Santa Ema returned identical product URLs across repeated runs."
+    },
+    "imageUrlStability": {
+      "itemsWithExtractedImages": ["000004766", "000009359"],
+      "allStable": true,
+      "details": "Captain Morgan F1/B1 ccstore URLs stable across 3 runs. Tito's F1 image stable across 2 runs. Most fallback runs omitted imageUrls due to schema drift."
+    },
+    "proofExtraction": {
+      "spiritsWithProofOnPage": 10,
+      "proofExtractedCorrectly": 10,
+      "successRate": 1.0,
+      "winesWithoutProofOnPage": 4,
+      "abvExtractedForWines": 0
+    },
+    "selectorFragility": [
+      "Search results often show skeleton/loading state; agents must wait 3-5s",
+      "Header search input may be inside shadow DOM; direct /search?Ntt= URL is more reliable",
+      "Age gate modal on first visit only; session cookies persist",
+      "Wine PDPs often omit ABV/proof entirely",
+      "LLM agent frequently returns ad-hoc JSON instead of strict contract"
+    ],
+    "figraniumSpecificIssues": [
+      "Figranium was never authenticated or executed in this environment",
+      "Wonder MCP namespace is not a substitute for figranium-mcp",
+      "Cannot validate block-based task execution, session persistence, or structured JSON output from Figranium"
+    ]
+  },
+  "imageValidation": {
+    "methodology": "When extracted, primaryImageUrl should be front bottle ccstore image; reject logos/banners/recommendations",
+    "results": [
+      {
+        "plcbItem": "000004766",
+        "primaryImageUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v4181866484679415500/products/000004766_1003007_F1.jpg&height=475&width=475",
+        "stableAcrossRuns": true,
+        "notes": "F1 front bottle; B1 back also captured"
+      },
+      {
+        "plcbItem": "000009359",
+        "primaryImageUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v8267655237597476021/products/000009359_F1.jpg&height=475&width=475",
+        "stableAcrossRuns": true,
+        "notes": "Single front bottle image"
+      }
+    ],
+    "coverageGap": "Most phase-2 fallback runs did not return imageUrls or primaryImageUrl due to LLM schema drift"
+  },
+  "failureBehavior": {
+    "noResult_999999999": { "matched": false, "notFound": true, "falsePositive": false },
+    "malformed_ABC123": { "matched": false, "notFound": true, "falsePositive": false },
+    "unpadded_4766": { "matched": true, "resolvesTo": "000004766", "falsePositive": false },
+    "figraniumAuthFailure": { "tested": true, "result": "blocked before execution", "structuredFailure": true }
   }
 }

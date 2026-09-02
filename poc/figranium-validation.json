@@ -1,0 +1,86 @@
+{
+  "phase": "figranium-control-validation",
+  "date": "2026-09-02",
+  "retryHost": "https://fig.thesmokeybarrelbar.com",
+  "figraniumMcpAuthenticated": false,
+  "figraniumExecuted": true,
+  "executionInterface": "figranium-sdk-http (@figranium/sdk against live host; no figranium MCP in Cloud Agent)",
+  "taskId": "task_1788365630737",
+  "taskName": "FWGS PLCB Product Resolver",
+  "recommendation": "CONDITIONAL GO",
+  "recommendationRationale": [
+    "14/14 control intents completed after one Cloudflare 524 retry on no-result run 2",
+    "100% schema compliance on successful runs; product matchOk 12/12; no-result 2/2 after retry; 0 false positives",
+    "Captain Morgan name+proof stable 3/3 (proof=70)",
+    "GAP: primaryImageUrl/imageUrls always empty — product images absent from Figranium extraction DOM/shadowText/cleaned HTML",
+    "GAP: volumeText occasionally missing (1/12 product runs); brand/category/country available in shadowText but not yet asserted in all stdout summaries",
+    "GAP: PDP open requires actions.navigate to /product/{plcb} after search — in-page location.href does not advance Figranium page state",
+    "GAP: Cloudflare 524 risk when origin >120s; keep waits short",
+    "No silent Composio fallback used"
+  ],
+  "silentFallbackUsed": false,
+  "connectivity": {
+    "requestedNamespace": "figranium",
+    "namespacePresentInCloudAgent": false,
+    "publicHostProbe": {
+      "baseUrl": "https://fig.thesmokeybarrelbar.com",
+      "reachableFromCloudAgent": true,
+      "apiHealth": {
+        "path": "/api/health",
+        "httpStatus": 200
+      },
+      "apiAuth": "FIGRANIUM_API_KEY accepted (env; not committed)"
+    },
+    "envSecretsPresent": {
+      "FIGRANIUM_BASE_URL": true,
+      "FIGRANIUM_API_KEY": true
+    }
+  },
+  "metrics": {
+    "totalFigraniumRuns": 14,
+    "schemaComplianceRate": 1,
+    "productMatchRate": 1,
+    "falsePositiveCount": 0,
+    "captainMorganStability": "3/3",
+    "primaryImageStability": "0/12",
+    "proofStability": {
+      "captainMorgan": [
+        70,
+        70,
+        70
+      ],
+      "titos": [
+        80,
+        80,
+        80
+      ],
+      "mishka": [
+        80,
+        80,
+        80
+      ]
+    },
+    "captchaLoginCount": 0,
+    "averageRuntimeMs": 56255,
+    "cloudflare524Count": 1,
+    "noResultBehavior": [
+      {
+        "run": 1,
+        "matchOk": true,
+        "notFound": true,
+        "outcome": "success"
+      },
+      {
+        "run": 2,
+        "matchOk": true,
+        "notFound": true,
+        "outcome": "success"
+      }
+    ]
+  },
+  "gaps": [
+    "Product bottle images not present in Figranium extraction sandbox (cleaned HTML + shadowText + light DOM img tags)",
+    "Must use actions.navigate to constructed /product/{plcbItem} URL; SERP click via location.href unreliable",
+    "Occasional CF 524 on longer runs (~120s proxy timeout)"
+  ]
+}

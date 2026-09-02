@@ -1,0 +1,57 @@
+{
+  "taskId": "task_1788365630737",
+  "completed": 1,
+  "total": 1,
+  "latest": {
+    "case": 5,
+    "itemId": "failure-no-result",
+    "plcbItem": "999999999",
+    "run": 1,
+    "executionEngine": "figranium",
+    "taskId": "task_1788365630737",
+    "outcome": "success",
+    "finalUrl": "https://www.finewineandgoodspirits.com/search?Ntt=999999999",
+    "durationClientMs": 119767,
+    "logs": [
+      "Navigating to: https://www.finewineandgoodspirits.com/search?Ntt=999999999",
+      "Waiting: 4000ms",
+      "Running custom JavaScript...",
+      "Waiting: 1000ms",
+      "Navigating to: https://www.finewineandgoodspirits.com/search?Ntt=999999999",
+      "Waiting: 5000ms",
+      "Running custom JavaScript...",
+      "Waiting: 1000ms"
+    ],
+    "screenshotUrl": "/captures/run_1788369375913_unknown_agent_1788369482456.png",
+    "result": {
+      "matched": false,
+      "ambiguous": false,
+      "notFound": true,
+      "plcbItem": "999999999",
+      "productUrl": null,
+      "name": null,
+      "brand": null,
+      "proof": null,
+      "abv": null,
+      "volumeText": null,
+      "category": null,
+      "subcategory": null,
+      "country": null,
+      "region": null,
+      "imageUrls": [],
+      "primaryImageUrl": null,
+      "diagnostics": {
+        "searchResultCount": 0,
+        "captchaSeen": false,
+        "loginRequired": false,
+        "selectorFailures": [],
+        "durationMs": 119767
+      }
+    },
+    "schemaCompliant": true,
+    "schemaIssues": [],
+    "matchOk": true,
+    "falsePositive": false,
+    "error": null
+  }
+}

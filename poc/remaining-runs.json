@@ -1,0 +1,290 @@
+[
+  {
+    "itemId": "spirit-titos-750ml",
+    "plcbItem": "000009359",
+    "run": 2,
+    "expected": {
+      "upc": null,
+      "name": "Tito's Handmade Vodka",
+      "proof": 80
+    },
+    "category": "spirit",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 000009359\nexecutionEngine: fallback\nrunIndex: 2\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=000009359 (search box or /search?Ntt=000009359).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"000009359\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Tito's Handmade Vodka\",\n  \"proof\": 80\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "spirit-smirnoff-rwb",
+    "plcbItem": "000001290",
+    "run": 1,
+    "expected": {
+      "upc": null,
+      "name": "Smirnoff Red White and Berry Vodka",
+      "proof": 60
+    },
+    "category": "spirit",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 000001290\nexecutionEngine: fallback\nrunIndex: 1\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=000001290 (search box or /search?Ntt=000001290).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"000001290\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Smirnoff Red White and Berry Vodka\",\n  \"proof\": 60\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "spirit-smirnoff-rwb",
+    "plcbItem": "000001290",
+    "run": 2,
+    "expected": {
+      "upc": null,
+      "name": "Smirnoff Red White and Berry Vodka",
+      "proof": 60
+    },
+    "category": "spirit",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 000001290\nexecutionEngine: fallback\nrunIndex: 2\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=000001290 (search box or /search?Ntt=000001290).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"000001290\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Smirnoff Red White and Berry Vodka\",\n  \"proof\": 60\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "spirit-palmers-gin",
+    "plcbItem": "000009436",
+    "run": 1,
+    "expected": {
+      "upc": null,
+      "name": "Palmer's Liberty Gin",
+      "proof": null
+    },
+    "category": "spirit",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 000009436\nexecutionEngine: fallback\nrunIndex: 1\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=000009436 (search box or /search?Ntt=000009436).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"000009436\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Palmer's Liberty Gin\",\n  \"proof\": null\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "spirit-palmers-gin",
+    "plcbItem": "000009436",
+    "run": 2,
+    "expected": {
+      "upc": null,
+      "name": "Palmer's Liberty Gin",
+      "proof": null
+    },
+    "category": "spirit",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 000009436\nexecutionEngine: fallback\nrunIndex: 2\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=000009436 (search box or /search?Ntt=000009436).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"000009436\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Palmer's Liberty Gin\",\n  \"proof\": null\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "spirit-mishka-1l",
+    "plcbItem": "000098661",
+    "run": 1,
+    "expected": {
+      "upc": null,
+      "name": "Mishka Vodka",
+      "proof": 80
+    },
+    "category": "spirit",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 000098661\nexecutionEngine: fallback\nrunIndex: 1\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=000098661 (search box or /search?Ntt=000098661).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"000098661\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Mishka Vodka\",\n  \"proof\": 80\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "spirit-mishka-1l",
+    "plcbItem": "000098661",
+    "run": 2,
+    "expected": {
+      "upc": null,
+      "name": "Mishka Vodka",
+      "proof": 80
+    },
+    "category": "spirit",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 000098661\nexecutionEngine: fallback\nrunIndex: 2\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=000098661 (search box or /search?Ntt=000098661).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"000098661\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Mishka Vodka\",\n  \"proof\": 80\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "spirit-horse-soldier-bourbon",
+    "plcbItem": "000088484",
+    "run": 1,
+    "expected": {
+      "upc": null,
+      "name": "Horse Soldier Small Batch Bourbon",
+      "proof": null
+    },
+    "category": "spirit",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 000088484\nexecutionEngine: fallback\nrunIndex: 1\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=000088484 (search box or /search?Ntt=000088484).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"000088484\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Horse Soldier Small Batch Bourbon\",\n  \"proof\": null\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "spirit-horse-soldier-bourbon",
+    "plcbItem": "000088484",
+    "run": 2,
+    "expected": {
+      "upc": null,
+      "name": "Horse Soldier Small Batch Bourbon",
+      "proof": null
+    },
+    "category": "spirit",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 000088484\nexecutionEngine: fallback\nrunIndex: 2\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=000088484 (search box or /search?Ntt=000088484).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"000088484\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Horse Soldier Small Batch Bourbon\",\n  \"proof\": null\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "spirit-limoncello",
+    "plcbItem": "000006331",
+    "run": 1,
+    "expected": {
+      "upc": null,
+      "name": "Caravella Limoncello",
+      "proof": null
+    },
+    "category": "spirit",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 000006331\nexecutionEngine: fallback\nrunIndex: 1\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=000006331 (search box or /search?Ntt=000006331).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"000006331\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Caravella Limoncello\",\n  \"proof\": null\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "spirit-limoncello",
+    "plcbItem": "000006331",
+    "run": 2,
+    "expected": {
+      "upc": null,
+      "name": "Caravella Limoncello",
+      "proof": null
+    },
+    "category": "spirit",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 000006331\nexecutionEngine: fallback\nrunIndex: 2\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=000006331 (search box or /search?Ntt=000006331).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"000006331\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Caravella Limoncello\",\n  \"proof\": null\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "wine-santa-ema-sauv-blanc",
+    "plcbItem": "100056945",
+    "run": 1,
+    "expected": {
+      "upc": null,
+      "name": "Santa Ema El Cruce Select Terroir Sauvignon Blanc",
+      "proof": null
+    },
+    "category": "wine",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 100056945\nexecutionEngine: fallback\nrunIndex: 1\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=100056945 (search box or /search?Ntt=100056945).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"100056945\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Santa Ema El Cruce Select Terroir Sauvignon Blanc\",\n  \"proof\": null\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "wine-santa-ema-sauv-blanc",
+    "plcbItem": "100056945",
+    "run": 2,
+    "expected": {
+      "upc": null,
+      "name": "Santa Ema El Cruce Select Terroir Sauvignon Blanc",
+      "proof": null
+    },
+    "category": "wine",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 100056945\nexecutionEngine: fallback\nrunIndex: 2\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=100056945 (search box or /search?Ntt=100056945).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"100056945\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Santa Ema El Cruce Select Terroir Sauvignon Blanc\",\n  \"proof\": null\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "wine-korbel-brut",
+    "plcbItem": "100059831",
+    "run": 1,
+    "expected": {
+      "upc": null,
+      "name": "Korbel Brut California Champagne",
+      "proof": null
+    },
+    "category": "wine",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 100059831\nexecutionEngine: fallback\nrunIndex: 1\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=100059831 (search box or /search?Ntt=100059831).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"100059831\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Korbel Brut California Champagne\",\n  \"proof\": null\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "wine-korbel-brut",
+    "plcbItem": "100059831",
+    "run": 2,
+    "expected": {
+      "upc": null,
+      "name": "Korbel Brut California Champagne",
+      "proof": null
+    },
+    "category": "wine",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 100059831\nexecutionEngine: fallback\nrunIndex: 2\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=100059831 (search box or /search?Ntt=100059831).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"100059831\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Korbel Brut California Champagne\",\n  \"proof\": null\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "wine-educated-guess-chardonnay",
+    "plcbItem": "100051387",
+    "run": 1,
+    "expected": {
+      "upc": null,
+      "name": "Educated Guess Reserve Chardonnay",
+      "proof": null
+    },
+    "category": "wine",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 100051387\nexecutionEngine: fallback\nrunIndex: 1\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=100051387 (search box or /search?Ntt=100051387).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"100051387\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Educated Guess Reserve Chardonnay\",\n  \"proof\": null\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "wine-educated-guess-chardonnay",
+    "plcbItem": "100051387",
+    "run": 2,
+    "expected": {
+      "upc": null,
+      "name": "Educated Guess Reserve Chardonnay",
+      "proof": null
+    },
+    "category": "wine",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 100051387\nexecutionEngine: fallback\nrunIndex: 2\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=100051387 (search box or /search?Ntt=100051387).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"100051387\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Educated Guess Reserve Chardonnay\",\n  \"proof\": null\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "wine-zweigelt",
+    "plcbItem": "100042845",
+    "run": 1,
+    "expected": {
+      "upc": null,
+      "name": "Winzer Krems Classic Blauer Zweigelt",
+      "proof": null
+    },
+    "category": "wine",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 100042845\nexecutionEngine: fallback\nrunIndex: 1\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=100042845 (search box or /search?Ntt=100042845).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"100042845\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Winzer Krems Classic Blauer Zweigelt\",\n  \"proof\": null\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "wine-zweigelt",
+    "plcbItem": "100042845",
+    "run": 2,
+    "expected": {
+      "upc": null,
+      "name": "Winzer Krems Classic Blauer Zweigelt",
+      "proof": null
+    },
+    "category": "wine",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 100042845\nexecutionEngine: fallback\nrunIndex: 2\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=100042845 (search box or /search?Ntt=100042845).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"100042845\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Winzer Krems Classic Blauer Zweigelt\",\n  \"proof\": null\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "spirit-battlefield-vodka-pa",
+    "plcbItem": "000009986",
+    "run": 1,
+    "expected": {
+      "upc": null,
+      "name": "Old Republic Distillery Battlefield Vodka",
+      "proof": null
+    },
+    "category": "spirit",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 000009986\nexecutionEngine: fallback\nrunIndex: 1\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=000009986 (search box or /search?Ntt=000009986).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"000009986\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Old Republic Distillery Battlefield Vodka\",\n  \"proof\": null\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "spirit-battlefield-vodka-pa",
+    "plcbItem": "000009986",
+    "run": 2,
+    "expected": {
+      "upc": null,
+      "name": "Old Republic Distillery Battlefield Vodka",
+      "proof": null
+    },
+    "category": "spirit",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 000009986\nexecutionEngine: fallback\nrunIndex: 2\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=000009986 (search box or /search?Ntt=000009986).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"000009986\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Old Republic Distillery Battlefield Vodka\",\n  \"proof\": null\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "failure-no-result",
+    "plcbItem": "999999999",
+    "run": 1,
+    "expected": {
+      "upc": null,
+      "name": null,
+      "proof": null
+    },
+    "category": "failure",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 999999999\nexecutionEngine: fallback\nrunIndex: 1\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=999999999 (search box or /search?Ntt=999999999).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"999999999\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": null,\n  \"proof\": null\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "failure-malformed",
+    "plcbItem": "ABC123",
+    "run": 1,
+    "expected": {
+      "upc": null,
+      "name": null,
+      "proof": null
+    },
+    "category": "failure",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: ABC123\nexecutionEngine: fallback\nrunIndex: 1\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=ABC123 (search box or /search?Ntt=ABC123).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"ABC123\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": null,\n  \"proof\": null\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  },
+  {
+    "itemId": "failure-unpadded",
+    "plcbItem": "4766",
+    "run": 1,
+    "expected": {
+      "upc": null,
+      "name": "Captain Morgan Original Spiced Rum",
+      "proof": 70
+    },
+    "category": "failure",
+    "prompt": "TASK NAME: FWGS PLCB Product Resolver\nINPUT plcbItem: 4766\nexecutionEngine: fallback\nrunIndex: 1\n\nUse a normal browser session. Do NOT solve CAPTCHAs, rotate proxies, or evade bot protection.\nIf CAPTCHA or hard login wall appears, stop with matched=false, captchaSeen/loginRequired set in diagnostics.\n\nSteps:\n1. Go to https://www.finewineandgoodspirits.com/\n2. Accept age gate YES if shown.\n3. Dismiss store/pickup modal only if it blocks search; do not log in.\n4. Search for plcbItem=4766 (search box or /search?Ntt=4766).\n5. Count credible product results only.\n6. If exactly one credible product, open it and extract metadata from that page only.\n7. Return ONLY valid JSON (no markdown) matching this schema:\n\n{\n  \"matched\": boolean,\n  \"ambiguous\": boolean,\n  \"notFound\": boolean,\n  \"executionEngine\": \"fallback\",\n  \"plcbItem\": \"4766\",\n  \"productUrl\": string|null,\n  \"name\": string|null,\n  \"brand\": string|null,\n  \"proof\": number|null,\n  \"abv\": number|null,\n  \"volumeText\": string|null,\n  \"category\": string|null,\n  \"subcategory\": string|null,\n  \"country\": string|null,\n  \"region\": string|null,\n  \"imageUrls\": string[],\n  \"primaryImageUrl\": string|null,\n  \"evidence\": {\n    \"plcbItemMatched\": boolean,\n    \"nameMatched\": boolean|null,\n    \"upcMatched\": boolean|null,\n    \"proofMatched\": boolean|null\n  },\n  \"diagnostics\": {\n    \"searchResultCount\": number|null,\n    \"selectorFailures\": string[],\n    \"captchaSeen\": boolean,\n    \"loginRequired\": boolean,\n    \"redirected\": boolean,\n    \"durationMs\": number|null\n  }\n}\n\nExpected (for evidence flags only, do not invent from this):\n{\n  \"upc\": null,\n  \"name\": \"Captain Morgan Original Spiced Rum\",\n  \"proof\": 70\n}\n\nRules:\n- matched=true only with exactly one credible product opened.\n- ambiguous=true if >1 credible product results.\n- notFound=true if 0 credible product results.\n- primaryImageUrl = best bottle/product image; exclude logos/banners/recommendations.\n- imageUrls = all credible product images from PDP.\n- Do not scrape unrelated products."
+  }
+]
