@@ -155,6 +155,10 @@
     },
     "directFetchOk": 9,
     "figraniumBrowserImageLoad": "confirmed for Santa Ema (title images 475x475) when datacenter GET 403",
-    "silentFallbackUsed": false
+    "silentFallbackUsed": false,
+    "confirmationRerun": true,
+    "identityOk": 12,
+    "allExactUrlStable": true,
+    "note": "Confirmation rerun after host recovery. Mishka run2/run3 replaced by successful post-502 retries. Cases 1-3 from same confirmation session."
   }
 }

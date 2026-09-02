@@ -53,6 +53,8 @@ Matrix: **0** false-recommendation selections.
 
 ## 5. Stability across runs (4 × 3)
 
+Confirmed twice (initial matrix + post-outage confirmation; Mishka run2/run3 retried after transient CF 502):
+
 | PLCB | Primary asset key | Exact URL stable | Source |
 | --- | --- | --- | --- |
 | `000004766` | `/file/v4181866484679415500/products/000004766_1003007_F1.jpg` | 3/3 | embedded_json |
@@ -60,7 +62,7 @@ Matrix: **0** false-recommendation selections.
 | `100056945` | `/file/v6165810439292000430/products/100056945_F1.jpg` | 3/3 | embedded_json |
 | `000098661` | `/file/v2450119215989133212/products/000098661_1035575_F1.jpg` | 3/3 | embedded_json |
 
-Matches prior Composio PoC assets for Captain Morgan / Tito's. Avg runtime ~22s.
+Matches prior Composio PoC assets for Captain Morgan / Tito's. Avg runtime ~22s. Host intermittency (502) remains an ops risk; image URLs themselves stay identical across successful runs.
 
 ## 6. Cookies / auth
 
