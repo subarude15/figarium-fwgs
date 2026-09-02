@@ -100,15 +100,16 @@ Expose runtime variable: `plcbItem`.
 
 See `poc/test-matrix.json`.
 
-## Phase-2 connectivity note
+## Phase-2 / Phase-3 connectivity note
 
-As of 2026-09-02, this cloud agent could **not** reach Figranium:
+As of 2026-09-02 (Cloud Agent re-check for Figranium control validation):
 
 | Path | Status |
 | --- | --- |
-| Wonder MCP namespace | `needsAuth` — no tools |
-| `figranium-mcp` / Cursor plugin | Not configured in agent environment |
-| `FIGRANIUM_BASE_URL` + `FIGRANIUM_API_KEY` | Not present |
-| Local Docker Figranium on `:11345` | Docker unavailable; port closed |
+| `figranium` MCP namespace | **Not present** in Cloud Agent catalog |
+| Wonder MCP namespace | `needsAuth` — interactive OAuth desktop-only |
+| Desktop `~/.cursor/mcp.json` | Does **not** apply to Cloud Agents |
+| `FIGRANIUM_BASE_URL` + `FIGRANIUM_API_KEY` | Not present in Cloud Agent env |
+| Direct probe `http://192.168.1.2:11345` | Connect timeout from Cloud Agent |
 
-Fallback runs must set `"executionEngine": "fallback"` and must **not** be reported as Figranium validation.
+See `poc/figranium-validation.json`. Do **not** silently fall back to Composio when validating Figranium. Fallback runs (if any) must set `"executionEngine": "fallback"`.

@@ -1,0 +1,149 @@
+{
+  "phase": "figranium-control-validation",
+  "date": "2026-09-02",
+  "figraniumMcpAuthenticated": false,
+  "figraniumExecuted": false,
+  "recommendation": "NO-GO",
+  "stoppedAt": "PHASE_1_VERIFY_FIGRANIUM",
+  "silentFallbackUsed": false,
+  "connectivity": {
+    "requestedNamespace": "figranium",
+    "namespacePresentInCloudAgent": false,
+    "availableNamespacesSample": [
+      "Browser-use",
+      "Composio",
+      "Wonder",
+      "cursor-cloud"
+    ],
+    "wonderMcpStatus": "needsAuth",
+    "wonderAuthAttempt": {
+      "attempted": true,
+      "result": "Interactive MCP authentication is only available in the Cursor desktop IDE. Not available in this Cloud Agent environment."
+    },
+    "directHttpProbe": {
+      "url": "http://192.168.1.2:11345/",
+      "result": "connect timeout after 5000ms",
+      "reachableFromCloudAgent": false,
+      "note": "Private LAN address is not routable from Cursor Cloud Agents"
+    },
+    "envSecretsPresent": {
+      "FIGRANIUM_BASE_URL": false,
+      "FIGRANIUM_API_KEY": false
+    },
+    "figraniumMcpPackage": {
+      "name": "figranium-mcp",
+      "version": "1.1.2",
+      "expectedTools": [
+        "create_task",
+        "task_list",
+        "task_execute",
+        "execution_list",
+        "schedule_list",
+        "schedule_get_all_status",
+        "schedule_get_status",
+        "schedule_set",
+        "schedule_delete",
+        "schedule_describe"
+      ],
+      "localNpxProbe": "Exits immediately without FIGRANIUM_API_KEY (expected)"
+    },
+    "blockerSummary": "Cloud Agent has no `figranium` MCP namespace. Desktop ~/.cursor/mcp.json does not apply here. Wonder MCP still needsAuth and cannot be interactively authenticated in Cloud Agents. Previously supplied FIGRANIUM_BASE_URL http://192.168.1.2:11345 is unreachable from this environment."
+  },
+  "plannedControlSet": {
+    "note": "Not executed — blocked at Phase 1",
+    "cases": [
+      {
+        "case": 1,
+        "itemId": "spirit-captain-morgan-175l",
+        "plcbItem": "000004766",
+        "expectedName": "Captain Morgan Original Spiced Rum",
+        "expectedProof": 70,
+        "runsPlanned": 3
+      },
+      {
+        "case": 2,
+        "itemId": "spirit-titos-750ml",
+        "plcbItem": "000009359",
+        "expectedName": "Tito's Handmade Vodka",
+        "expectedProof": 80,
+        "runsPlanned": 3,
+        "source": "poc/test-matrix.json"
+      },
+      {
+        "case": 3,
+        "itemId": "wine-santa-ema-sauv-blanc",
+        "plcbItem": "100056945",
+        "expectedName": "Santa Ema El Cruce Select Terroir Sauvignon Blanc",
+        "expectedProof": null,
+        "runsPlanned": 3,
+        "source": "poc/test-matrix.json"
+      },
+      {
+        "case": 4,
+        "itemId": "spirit-mishka-1l",
+        "plcbItem": "000098661",
+        "expectedName": "Mishka Vodka",
+        "expectedProof": 80,
+        "volumeNote": "1L package size",
+        "runsPlanned": 3,
+        "source": "poc/test-matrix.json"
+      },
+      {
+        "case": 5,
+        "itemId": "failure-no-result",
+        "plcbItem": "999999999",
+        "expectNotFound": true,
+        "runsPlanned": 2,
+        "source": "poc/test-matrix.json"
+      }
+    ],
+    "totalRunsPlanned": 14
+  },
+  "savedTaskDraft": {
+    "name": "FWGS PLCB Product Resolver",
+    "status": "not_created",
+    "taskId": null,
+    "reason": "create_task unavailable — figranium MCP not connected",
+    "design": {
+      "mode": "scrape",
+      "startingUrl": "https://www.finewineandgoodspirits.com/",
+      "variables": ["plcbItem"],
+      "steps": [
+        "navigate home",
+        "click age gate YES if visible",
+        "navigate /search?Ntt={$plcbItem}",
+        "wait for search results or no-results page",
+        "javascript: count credible product cards; return searchResultCount",
+        "if count===1: click product link",
+        "if count===0: return notFound schema",
+        "if count>1: return ambiguous schema",
+        "javascript: extract PDP fields + imageUrls into exact output schema (no prose)"
+      ],
+      "outputRules": [
+        "Return only the required JSON keys/types",
+        "Use null for missing values",
+        "No free-form prose",
+        "Prefer DOM/JSON-LD extraction over LLM interpretation"
+      ]
+    }
+  },
+  "metrics": {
+    "totalFigraniumRuns": 0,
+    "schemaComplianceRate": null,
+    "productMatchRate": null,
+    "falsePositiveCount": null,
+    "captainMorganStability": null,
+    "primaryImageStability": null,
+    "proofStability": null,
+    "captchaLoginCount": null,
+    "averageRuntimeMs": null,
+    "selectorFailures": [],
+    "noResultBehavior": null
+  },
+  "unblockChecklist": [
+    "Expose Figranium on a Cloud-Agent-reachable URL (tunnel/public host), not 192.168.1.2",
+    "Add Cloud Agent environment secrets: FIGRANIUM_BASE_URL, FIGRANIUM_API_KEY",
+    "Attach custom MCP server `figranium` (`npx -y figranium-mcp`) to the Cloud Agent environment",
+    "Re-run this agent; Phase 1 should succeed on task_list before any matrix runs"
+  ]
+}

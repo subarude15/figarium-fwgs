@@ -1,157 +1,107 @@
-# FWGS PLCB Product Resolver — PoC Summary (Phase 2)
+# FWGS PLCB Product Resolver — PoC Summary
 
-Date: 2026-09-02
+Date: 2026-09-02 (updated: Figranium control-validation attempt)
 
 ## Executive summary
 
 **Recommendation: NO-GO** for a Figranium-based thin external FWGS adapter in The Smokey Vault.
 
-Figranium itself was **not authenticated or executed** in this cloud agent environment. All 21 runs used Composio `BROWSER_TOOL` (Browser Use cloud) with `executionEngine: "fallback"`. The FWGS resolution **workflow** is promising, but **Figranium as the execution engine remains unvalidated**.
+This phase was required to use **real Figranium MCP execution**. It **stopped at Phase 1** — Figranium MCP is not available to this Cloud Agent. No silent Composio fallback was used.
 
-A **CONDITIONAL GO** applies only to continuing PoC work on the resolver contract and selector strategy — not to production integration behind Figranium.
+Prior phase-2 fallback evidence (21 Composio runs, 17/17 product matches, 0 false positives) remains useful for the **FWGS workflow**, but does **not** validate Figranium.
+
+See `poc/figranium-validation.json` for the full Phase-1 probe record.
 
 ---
 
-## 1. Was Figranium successfully authenticated and used?
+## Figranium control-validation (this phase)
 
-**No.**
+### Figranium MCP authenticated: **no**
 
-| Path | Status |
+| Check | Result |
 | --- | --- |
-| Wonder MCP namespace | `needsAuth` — zero tools; interactive OAuth unavailable in cloud agent |
-| Browser-use MCP | `error` during tool discovery |
-| `figranium-mcp` / Cursor plugin | Not configured in agent environment |
-| `FIGRANIUM_BASE_URL` + `FIGRANIUM_API_KEY` | Not present in environment |
-| Local Docker Figranium on `:11345` | Docker unavailable; port closed |
+| `figranium` MCP namespace in Cloud Agent | **Missing** (not in catalog) |
+| `task_list` / `create_task` / `task_execute` | **Not callable** |
+| Saved task ID/name | **Not created** |
+| Total Figranium runs | **0** |
+| Schema compliance rate | **n/a** (no runs) |
+| Product match rate | **n/a** |
+| False positive count | **n/a** |
+| Captain Morgan stability | **n/a** (Figranium) |
+| Primary image stability | **n/a** (Figranium) |
+| Proof stability | **n/a** (Figranium) |
+| CAPTCHA/login count | **n/a** |
+| Average runtime | **n/a** |
+| Selector failures | **n/a** |
+| No-result behavior | **n/a** (Figranium) |
+| Silent fallback used | **No** |
 
-**Required to unblock:**
+### Exact blocker
 
-1. Self-host Figranium (`ghcr.io/figranium/figranium:latest`) on a reachable host
-2. Configure Cursor MCP: `npx -y figranium-mcp` with `FIGRANIUM_BASE_URL` and `FIGRANIUM_API_KEY`
-3. Add secrets to Cloud Agent environment for autonomous runs
+1. **No `figranium` MCP namespace** in this Cloud Agent. Available namespaces include Composio, Wonder, Browser-use, etc. — not `figranium`.
+2. Desktop `~/.cursor/mcp.json` (where you may have added figranium) **does not apply** to Cloud Agents.
+3. **Wonder MCP** still reports `needsAuth`. Interactive OAuth is **unavailable** in Cloud Agents (`mcp_auth` returns desktop-only error). Wonder is not a substitute for `figranium-mcp`.
+4. Direct HTTP probe to previously supplied `http://192.168.1.2:11345/` **times out** (private LAN, not reachable from Cloud Agents).
+5. Environment secrets `FIGRANIUM_BASE_URL` / `FIGRANIUM_API_KEY` are **not present** in this agent process.
 
-Wonder is **not** a substitute for `figranium-mcp`.
+### Planned control set (not executed)
+
+| Case | PLCB item | Role | Runs planned |
+| --- | --- | --- | --- |
+| 1 | `000004766` | Captain Morgan control | 3 |
+| 2 | `000009359` | Spirit (Tito's) | 3 |
+| 3 | `100056945` | Wine (Santa Ema) | 3 |
+| 4 | `000098661` | Different size (Mishka 1L) | 3 |
+| 5 | `999999999` | No-result | 2 |
+
+Saved task draft name: **FWGS PLCB Product Resolver** (not created). Design notes are in `poc/figranium-validation.json`.
+
+### Unblock steps
+
+1. Expose Figranium on a **Cloud-Agent-reachable URL** (Cloudflare Tunnel / Tailscale Funnel / ngrok / public reverse proxy) — not `192.168.1.2`.
+2. Add Cloud Agent environment secrets: `FIGRANIUM_BASE_URL`, `FIGRANIUM_API_KEY`.
+3. Attach custom MCP server `figranium` (`npx -y figranium-mcp`) to the **Cloud Agent environment** (not only Desktop Cursor).
+4. Re-run this agent; Phase 1 must succeed with `task_list` before creating the saved task and running the 5-case control set.
+
+Environment dashboard: https://cursor.com/dashboard/cloud-agents/environments/e/e06f916c-a6d7-11f1-a7d1-d6b4613131ce
 
 ---
 
-## 2. Test coverage
+## Phase 2 fallback evidence (historical — not Figranium)
 
 | Metric | Value |
 | --- | --- |
+| Execution engine | Composio `BROWSER_TOOL` (`executionEngine: "fallback"`) |
 | Items in matrix | 15 (12 products + 3 failure cases) |
-| Spirits tested | 8 |
-| Wines tested | 4 |
-| Different package sizes | 2 (1.75L Captain Morgan, 1L Mishka, 561ML Korbel multipack) |
-| Missing/non-applicable proof | 4 wines + Palmer's gin |
-| No-result case | `999999999` |
-| Malformed input | `ABC123` |
-| Unpadded normalization | `4766` → `000004766` |
-| Total runs executed | 21 |
-| Figranium runs | 0 |
-| Fallback runs | 21 |
-| Planned runs (full 2× matrix) | 28 |
-| Second-run coverage | Partial — 5 items with ≥2 runs |
+| Total fallback runs | 21 |
+| Product match rate | 17/17 (100%), 0 false positives |
+| Captain Morgan 3/3 | Stable URL, proof 70, stable F1/B1 images |
+| CAPTCHA / login | None observed |
+| Schema compliance | 1/21 fully compliant (LLM drift) |
 
-Test matrix: `poc/test-matrix.json`
+Artifacts: `poc/test-matrix.json`, `poc/run-results.json`
 
 ---
 
-## 3. Reliability metrics
+## Recommendation
 
-| Metric | Result |
+| Option | Applies? |
 | --- | --- |
-| Match rate (product runs) | **17/17 (100%)** — no false positives |
-| False positive count | **0** |
-| No-result count (correct) | **2/2** (`999999999`, `ABC123`) |
-| Ambiguous count | **0** |
-| CAPTCHA observed | **0** |
-| Login required | **0** |
-| Captain Morgan 3/3 runs | Matched; proof 70; identical product URL |
-| Product URL stability (multi-run items) | **Stable** for Captain Morgan, Tito's, Smirnoff, Mishka, Santa Ema |
-| Image URL stability (where extracted) | **Stable** for Captain Morgan (F1/B1) and Tito's (F1) |
-| Proof extraction (spirits with proof on page) | **10/10 correct** |
-| Wine ABV extraction | **0/4** — ABV often absent on FWGS wine PDPs |
-| Schema fully compliant runs | **1/21** (Tito's run 1 only) |
-| Average steps per run | ~4.8 (range 1–14) |
-| Average runtime estimate | ~30–90 seconds per run |
+| **GO** | **No** — Figranium never executed; GO requires real Figranium + 100% schema compliance |
+| **CONDITIONAL GO** | Only for continuing **connectivity setup** / Desktop-side Figranium experiments |
+| **NO-GO** | **Yes** for a Smokey Vault Figranium adapter until Cloud Agent can call `figranium` MCP |
 
-Raw results: `poc/run-results.json`
+### GO checklist (current)
 
----
-
-## 4. Image validation
-
-| PLCB item | Primary image | Stable across runs |
-| --- | --- | --- |
-| `000004766` | ccstore F1 front bottle (`...000004766_1003007_F1.jpg`) | Yes (3/3 runs) |
-| `000009359` | ccstore F1 front bottle (`...000009359_F1.jpg`) | Yes (2/2 runs with images) |
-
-**Gap:** Most phase-2 fallback runs omitted `imageUrls` / `primaryImageUrl` due to LLM schema drift. Image extraction works when the agent follows the contract, but is not reliably enforced under fallback execution.
-
----
-
-## 5. Failure behavior
-
-| Case | Expected | Observed |
-| --- | --- | --- |
-| `999999999` (no result) | `matched=false`, `notFound=true` | Correct — FWGS "no search results" page |
-| `ABC123` (malformed) | `matched=false`, no false match | Correct — no results |
-| `4766` (unpadded) | May resolve via FWGS search | Resolves to Captain Morgan `000004766` PDP |
-| Figranium auth | Structured blocker | Documented; no silent fallback to Figranium |
-| Selector missing | Structured partial result | Agents wait for skeleton loaders; direct search URL most reliable |
-| Network/timeout | Not explicitly injected | One Palmer's task stuck in queue; stopped and retried successfully |
-
-No guessing or unrelated product acceptance observed.
-
----
-
-## 6. Selector / session fragility
-
-- Age gate modal on first visit; one **YES** click sufficient; cookies persist.
-- Search results frequently show skeleton loading — agents need 3–5s wait.
-- Header search may sit in shadow DOM; **`/search?Ntt={plcbItem}`** is the most reliable entry.
-- Wine PDPs often omit ABV/proof — return `null`, do not invent.
-- LLM-driven fallback frequently returns ad-hoc JSON (`productName` vs `name`, nested `product` object, prose diagnostics).
-- Persistent session can skip search on repeat (Captain Morgan run 2) — good for session behavior, weak for end-to-end regression unless forced.
-
----
-
-## 7. Figranium-specific issues
-
-1. **Never executed** — cannot validate block-based tasks, `task_execute`, or Figranium session persistence.
-2. **Wonder ≠ Figranium** — Wonder MCP `needsAuth` does not provide Figranium browser-worker tools.
-3. **No deterministic JSON** — Figranium's value proposition (structured block output) was not tested.
-4. **Cloud Agent gap** — requires user to configure `figranium-mcp` + secrets or authenticate in Cursor Desktop.
-
----
-
-## 8. Production readiness decision
-
-### Is Figranium reliable enough to justify a thin external FWGS adapter in The Smokey Vault?
-
-**NO-GO** — conditions for GO are not met:
-
-| GO requirement | Status |
+| Requirement | Status |
 | --- | --- |
-| Figranium actually used | ❌ Not used |
-| No false positive matches | ✅ 0 observed (fallback only) |
-| No unresolved auth blocker | ❌ Blocker unresolved |
-| Stable Captain Morgan repeated runs | ✅ 3/3 stable (fallback) |
-| Acceptable broader matrix reliability | ✅ 17/17 product matches (fallback) |
-| Structured no-result/ambiguous behavior | ✅ Correct for tested failure cases |
-| Useful product image extraction | ⚠️ Works when schema followed; unreliable under LLM fallback |
-| No CAPTCHA/login dependency | ✅ None observed |
-
-### Recommended next steps
-
-1. **User action:** Configure `figranium-mcp` with `FIGRANIUM_BASE_URL` and `FIGRANIUM_API_KEY` (or authenticate Wonder/Figranium in Cursor Desktop).
-2. **Re-run** the same test matrix through Figranium with a saved block-based task (not LLM prompt agent).
-3. **Enforce** strict JSON schema validation at the adapter boundary.
-4. **Complete** second-run coverage for all 12 product items under Figranium before revisiting GO.
-
-### CONDITIONAL GO (workflow only)
-
-The FWGS PLCB lookup **workflow** (search by item number → single PDP → extract metadata) is viable. A thin adapter contract is defined in `poc/FWGS_PLCB_PRODUCT_RESOLVER.md`. Proceed with Figranium validation before any Smokey Vault integration.
+| Real Figranium execution | ❌ |
+| 100% schema compliance | ❌ not measured |
+| 0 false positives | ⚠️ fallback only |
+| Captain Morgan stable on Figranium | ❌ not run |
+| Useful stable image extraction | ❌ not run on Figranium |
+| Deterministic no-result behavior | ❌ not run on Figranium |
+| No CAPTCHA/login dependency | ⚠️ fallback only |
 
 ---
 
@@ -159,10 +109,9 @@ The FWGS PLCB lookup **workflow** (search by item number → single PDP → extr
 
 | File | Description |
 | --- | --- |
-| `poc/FWGS_PLCB_PRODUCT_RESOLVER.md` | Resolver contract v2 + Figranium task design |
-| `poc/test-matrix.json` | 15-case test matrix with connectivity notes |
-| `poc/run-results.json` | 21 runs with normalized metrics |
-| `poc/run-plan.mjs` | Prompt builder for batch execution |
+| `poc/figranium-validation.json` | Phase-1 connectivity probe + planned control set + task draft |
+| `poc/FWGS_PLCB_PRODUCT_RESOLVER.md` | Resolver contract v2 |
+| `poc/test-matrix.json` | Full 15-case matrix |
+| `poc/run-results.json` | Historical fallback runs (21) |
 | `poc/POC_SUMMARY.md` | This document |
-
-PR: https://github.com/subarude15/figarium-fwgs/pull/1
+| `poc/run-plan.mjs` | Fallback prompt builder (not used this phase) |

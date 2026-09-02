@@ -4,13 +4,21 @@
   "executionEngineRequested": "figranium",
   "executionEngineActual": "fallback",
   "figraniumValidated": false,
+  "figraniumControlValidation": {
+    "date": "2026-09-02",
+    "artifact": "poc/figranium-validation.json",
+    "figraniumRuns": 0,
+    "stoppedAt": "PHASE_1_VERIFY_FIGRANIUM",
+    "silentFallbackUsed": false
+  },
   "figraniumConnectivity": {
     "available": false,
-    "blocker": "Wonder MCP namespace reports needsAuth (zero tools; interactive OAuth unavailable in cloud agent). Browser-use MCP failed tool discovery. No FIGRANIUM_BASE_URL/FIGRANIUM_API_KEY in environment. Docker unavailable; localhost:11345 closed.",
+    "blocker": "Cloud Agent has no `figranium` MCP namespace. Desktop ~/.cursor/mcp.json does not apply. Wonder MCP needsAuth and interactive OAuth is desktop-only. Direct probe to http://192.168.1.2:11345 times out from Cloud Agents. FIGRANIUM_BASE_URL/FIGRANIUM_API_KEY secrets absent.",
     "requiredConfiguration": [
-      "Self-host Figranium (ghcr.io/figranium/figranium:latest) on a reachable host",
-      "Configure Cursor MCP: npx -y figranium-mcp with FIGRANIUM_BASE_URL and FIGRANIUM_API_KEY",
-      "Add secrets to Cloud Agent environment for autonomous runs"
+      "Expose Figranium on a Cloud-Agent-reachable URL (not a private LAN IP)",
+      "Add Cloud Agent secrets FIGRANIUM_BASE_URL and FIGRANIUM_API_KEY",
+      "Attach custom MCP server figranium (npx -y figranium-mcp) to the Cloud Agent environment",
+      "Re-run agent and confirm task_list before create_task / control-set execution"
     ]
   },
   "fallbackRuntime": "Composio BROWSER_TOOL (Browser Use cloud)",
