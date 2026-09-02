@@ -1,0 +1,516 @@
+{
+  "generatedAt": "2026-09-02T20:23:16.644183+00:00",
+  "baseUrl": "https://fig.thesmokeybarrelbar.com",
+  "taskId": "task_1788378025198",
+  "taskName": "FWGS PLCB Image Extractor",
+  "executionInterface": "figranium-sdk-http",
+  "method": "Live browser JS reads og:image + JSON-LD Product.image (PLCB in asset path); stashes payload for extraction.",
+  "note": "Confirmation rerun after host recovery. Mishka run2/run3 replaced by successful post-502 retries. Cases 1-3 from same confirmation session.",
+  "runs": [
+    {
+      "case": 1,
+      "itemId": "spirit-captain-morgan-175l",
+      "plcbItem": "000004766",
+      "run": 1,
+      "executionEngine": "figranium",
+      "taskId": "task_1788378025198",
+      "taskName": "FWGS PLCB Image Extractor",
+      "outcome": "success",
+      "finalUrl": "https://www.finewineandgoodspirits.com/product/000004766",
+      "durationMs": 22841,
+      "imageUrls": [
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v4181866484679415500/products/000004766_1003007_F1.jpg&height=475&width=475",
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v7401459619033620653/products/000004766_1003007_B1.jpg&height=475&width=475"
+      ],
+      "primaryImageUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v4181866484679415500/products/000004766_1003007_F1.jpg&height=475&width=475",
+      "candidateCount": 2,
+      "extractionSource": "embedded_json",
+      "identityEvidence": {
+        "plcbInPrimaryUrl": true,
+        "plcbInAnyUrl": true,
+        "productPathMatch": true,
+        "skuInJsonLd": false
+      },
+      "assetKey": "/file/v4181866484679415500/products/000004766_1003007_F1.jpg",
+      "reachabilityDirect": {
+        "httpStatus": 200,
+        "contentType": "image/jpeg",
+        "bytes": 27269,
+        "reachable": true
+      },
+      "reachabilityFigranium": {
+        "via": "figranium-navigate",
+        "finalUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v4181866484679415500/products/000004766_1003007_F1.jpg&height=475&width=475",
+        "outcome": "success",
+        "data": "Extraction script error: location is not defined"
+      },
+      "falseRecommendationRisk": false,
+      "error": null,
+      "resultOrigin": "extraction"
+    },
+    {
+      "case": 1,
+      "itemId": "spirit-captain-morgan-175l",
+      "plcbItem": "000004766",
+      "run": 2,
+      "executionEngine": "figranium",
+      "taskId": "task_1788378025198",
+      "taskName": "FWGS PLCB Image Extractor",
+      "outcome": "success",
+      "finalUrl": "https://www.finewineandgoodspirits.com/product/000004766",
+      "durationMs": 25297,
+      "imageUrls": [
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v4181866484679415500/products/000004766_1003007_F1.jpg&height=475&width=475",
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v7401459619033620653/products/000004766_1003007_B1.jpg&height=475&width=475"
+      ],
+      "primaryImageUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v4181866484679415500/products/000004766_1003007_F1.jpg&height=475&width=475",
+      "candidateCount": 2,
+      "extractionSource": "embedded_json",
+      "identityEvidence": {
+        "plcbInPrimaryUrl": true,
+        "plcbInAnyUrl": true,
+        "productPathMatch": true,
+        "skuInJsonLd": false
+      },
+      "assetKey": "/file/v4181866484679415500/products/000004766_1003007_F1.jpg",
+      "reachabilityDirect": {
+        "httpStatus": 200,
+        "contentType": "image/jpeg",
+        "bytes": 27269,
+        "reachable": true
+      },
+      "reachabilityFigranium": null,
+      "falseRecommendationRisk": false,
+      "error": null,
+      "resultOrigin": "extraction"
+    },
+    {
+      "case": 1,
+      "itemId": "spirit-captain-morgan-175l",
+      "plcbItem": "000004766",
+      "run": 3,
+      "executionEngine": "figranium",
+      "taskId": "task_1788378025198",
+      "taskName": "FWGS PLCB Image Extractor",
+      "outcome": "success",
+      "finalUrl": "https://www.finewineandgoodspirits.com/product/000004766",
+      "durationMs": 28705,
+      "imageUrls": [
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v4181866484679415500/products/000004766_1003007_F1.jpg&height=475&width=475",
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v7401459619033620653/products/000004766_1003007_B1.jpg&height=475&width=475"
+      ],
+      "primaryImageUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v4181866484679415500/products/000004766_1003007_F1.jpg&height=475&width=475",
+      "candidateCount": 2,
+      "extractionSource": "embedded_json",
+      "identityEvidence": {
+        "plcbInPrimaryUrl": true,
+        "plcbInAnyUrl": true,
+        "productPathMatch": true,
+        "skuInJsonLd": false
+      },
+      "assetKey": "/file/v4181866484679415500/products/000004766_1003007_F1.jpg",
+      "reachabilityDirect": {
+        "httpStatus": 200,
+        "contentType": "image/jpeg",
+        "bytes": 27269,
+        "reachable": true
+      },
+      "reachabilityFigranium": null,
+      "falseRecommendationRisk": false,
+      "error": null,
+      "resultOrigin": "extraction"
+    },
+    {
+      "case": 2,
+      "itemId": "spirit-titos-750ml",
+      "plcbItem": "000009359",
+      "run": 1,
+      "executionEngine": "figranium",
+      "taskId": "task_1788378025198",
+      "taskName": "FWGS PLCB Image Extractor",
+      "outcome": "success",
+      "finalUrl": "https://www.finewineandgoodspirits.com/product/000009359",
+      "durationMs": 25145,
+      "imageUrls": [
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v8267655237597476021/products/000009359_F1.jpg&height=475&width=475"
+      ],
+      "primaryImageUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v8267655237597476021/products/000009359_F1.jpg&height=475&width=475",
+      "candidateCount": 1,
+      "extractionSource": "embedded_json",
+      "identityEvidence": {
+        "plcbInPrimaryUrl": true,
+        "plcbInAnyUrl": true,
+        "productPathMatch": true,
+        "skuInJsonLd": false
+      },
+      "assetKey": "/file/v8267655237597476021/products/000009359_F1.jpg",
+      "reachabilityDirect": {
+        "httpStatus": 200,
+        "contentType": "image/jpeg",
+        "bytes": 19350,
+        "reachable": true
+      },
+      "reachabilityFigranium": null,
+      "falseRecommendationRisk": false,
+      "error": null,
+      "resultOrigin": "extraction"
+    },
+    {
+      "case": 2,
+      "itemId": "spirit-titos-750ml",
+      "plcbItem": "000009359",
+      "run": 2,
+      "executionEngine": "figranium",
+      "taskId": "task_1788378025198",
+      "taskName": "FWGS PLCB Image Extractor",
+      "outcome": "success",
+      "finalUrl": "https://www.finewineandgoodspirits.com/product/000009359",
+      "durationMs": 24587,
+      "imageUrls": [
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v8267655237597476021/products/000009359_F1.jpg&height=475&width=475"
+      ],
+      "primaryImageUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v8267655237597476021/products/000009359_F1.jpg&height=475&width=475",
+      "candidateCount": 1,
+      "extractionSource": "embedded_json",
+      "identityEvidence": {
+        "plcbInPrimaryUrl": true,
+        "plcbInAnyUrl": true,
+        "productPathMatch": true,
+        "skuInJsonLd": false
+      },
+      "assetKey": "/file/v8267655237597476021/products/000009359_F1.jpg",
+      "reachabilityDirect": {
+        "httpStatus": 200,
+        "contentType": "image/jpeg",
+        "bytes": 19350,
+        "reachable": true
+      },
+      "reachabilityFigranium": null,
+      "falseRecommendationRisk": false,
+      "error": null,
+      "resultOrigin": "extraction"
+    },
+    {
+      "case": 2,
+      "itemId": "spirit-titos-750ml",
+      "plcbItem": "000009359",
+      "run": 3,
+      "executionEngine": "figranium",
+      "taskId": "task_1788378025198",
+      "taskName": "FWGS PLCB Image Extractor",
+      "outcome": "success",
+      "finalUrl": "https://www.finewineandgoodspirits.com/product/000009359",
+      "durationMs": 23725,
+      "imageUrls": [
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v8267655237597476021/products/000009359_F1.jpg&height=475&width=475"
+      ],
+      "primaryImageUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v8267655237597476021/products/000009359_F1.jpg&height=475&width=475",
+      "candidateCount": 1,
+      "extractionSource": "embedded_json",
+      "identityEvidence": {
+        "plcbInPrimaryUrl": true,
+        "plcbInAnyUrl": true,
+        "productPathMatch": true,
+        "skuInJsonLd": false
+      },
+      "assetKey": "/file/v8267655237597476021/products/000009359_F1.jpg",
+      "reachabilityDirect": {
+        "httpStatus": 200,
+        "contentType": "image/jpeg",
+        "bytes": 19350,
+        "reachable": true
+      },
+      "reachabilityFigranium": null,
+      "falseRecommendationRisk": false,
+      "error": null,
+      "resultOrigin": "extraction"
+    },
+    {
+      "case": 3,
+      "itemId": "wine-santa-ema-sauv-blanc",
+      "plcbItem": "100056945",
+      "run": 1,
+      "executionEngine": "figranium",
+      "taskId": "task_1788378025198",
+      "taskName": "FWGS PLCB Image Extractor",
+      "outcome": "success",
+      "finalUrl": "https://www.finewineandgoodspirits.com/product/100056945",
+      "durationMs": 29768,
+      "imageUrls": [
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v6165810439292000430/products/100056945_F1.jpg&height=475&width=475",
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v6318796687229634738/products/100056945_B1.jpg&height=475&width=475"
+      ],
+      "primaryImageUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v6165810439292000430/products/100056945_F1.jpg&height=475&width=475",
+      "candidateCount": 2,
+      "extractionSource": "embedded_json",
+      "identityEvidence": {
+        "plcbInPrimaryUrl": true,
+        "plcbInAnyUrl": true,
+        "productPathMatch": true,
+        "skuInJsonLd": false
+      },
+      "assetKey": "/file/v6165810439292000430/products/100056945_F1.jpg",
+      "reachabilityDirect": {
+        "httpStatus": 403,
+        "contentType": "text/html",
+        "bytes": 256,
+        "reachable": false
+      },
+      "reachabilityFigranium": null,
+      "falseRecommendationRisk": false,
+      "error": null,
+      "resultOrigin": "extraction"
+    },
+    {
+      "case": 3,
+      "itemId": "wine-santa-ema-sauv-blanc",
+      "plcbItem": "100056945",
+      "run": 2,
+      "executionEngine": "figranium",
+      "taskId": "task_1788378025198",
+      "taskName": "FWGS PLCB Image Extractor",
+      "outcome": "success",
+      "finalUrl": "https://www.finewineandgoodspirits.com/product/100056945",
+      "durationMs": 25887,
+      "imageUrls": [
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v6165810439292000430/products/100056945_F1.jpg&height=475&width=475",
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v6318796687229634738/products/100056945_B1.jpg&height=475&width=475"
+      ],
+      "primaryImageUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v6165810439292000430/products/100056945_F1.jpg&height=475&width=475",
+      "candidateCount": 2,
+      "extractionSource": "embedded_json",
+      "identityEvidence": {
+        "plcbInPrimaryUrl": true,
+        "plcbInAnyUrl": true,
+        "productPathMatch": true,
+        "skuInJsonLd": false
+      },
+      "assetKey": "/file/v6165810439292000430/products/100056945_F1.jpg",
+      "reachabilityDirect": {
+        "httpStatus": 403,
+        "contentType": "text/html",
+        "bytes": 256,
+        "reachable": false
+      },
+      "reachabilityFigranium": null,
+      "falseRecommendationRisk": false,
+      "error": null,
+      "resultOrigin": "extraction"
+    },
+    {
+      "case": 3,
+      "itemId": "wine-santa-ema-sauv-blanc",
+      "plcbItem": "100056945",
+      "run": 3,
+      "executionEngine": "figranium",
+      "taskId": "task_1788378025198",
+      "taskName": "FWGS PLCB Image Extractor",
+      "outcome": "success",
+      "finalUrl": "https://www.finewineandgoodspirits.com/product/100056945",
+      "durationMs": 27054,
+      "imageUrls": [
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v6165810439292000430/products/100056945_F1.jpg&height=475&width=475",
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v6318796687229634738/products/100056945_B1.jpg&height=475&width=475"
+      ],
+      "primaryImageUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v6165810439292000430/products/100056945_F1.jpg&height=475&width=475",
+      "candidateCount": 2,
+      "extractionSource": "embedded_json",
+      "identityEvidence": {
+        "plcbInPrimaryUrl": true,
+        "plcbInAnyUrl": true,
+        "productPathMatch": true,
+        "skuInJsonLd": false
+      },
+      "assetKey": "/file/v6165810439292000430/products/100056945_F1.jpg",
+      "reachabilityDirect": {
+        "httpStatus": 403,
+        "contentType": "text/html",
+        "bytes": 256,
+        "reachable": false
+      },
+      "reachabilityFigranium": null,
+      "falseRecommendationRisk": false,
+      "error": null,
+      "resultOrigin": "extraction"
+    },
+    {
+      "case": 4,
+      "itemId": "spirit-mishka-1l",
+      "plcbItem": "000098661",
+      "run": 1,
+      "executionEngine": "figranium",
+      "taskId": "task_1788378025198",
+      "taskName": "FWGS PLCB Image Extractor",
+      "outcome": "success",
+      "finalUrl": "https://www.finewineandgoodspirits.com/product/000098661",
+      "durationMs": 27684,
+      "imageUrls": [
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v2450119215989133212/products/000098661_1035575_F1.jpg&height=475&width=475",
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v7111356916660438873/products/000098661_1035575_B1.jpg&height=475&width=475"
+      ],
+      "primaryImageUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v2450119215989133212/products/000098661_1035575_F1.jpg&height=475&width=475",
+      "candidateCount": 2,
+      "extractionSource": "embedded_json",
+      "identityEvidence": {
+        "plcbInPrimaryUrl": true,
+        "plcbInAnyUrl": true,
+        "productPathMatch": true,
+        "skuInJsonLd": false
+      },
+      "assetKey": "/file/v2450119215989133212/products/000098661_1035575_F1.jpg",
+      "reachabilityDirect": {
+        "httpStatus": 200,
+        "contentType": "image/jpeg",
+        "bytes": 10509,
+        "reachable": true
+      },
+      "reachabilityFigranium": null,
+      "falseRecommendationRisk": false,
+      "error": null,
+      "resultOrigin": "extraction"
+    },
+    {
+      "case": 4,
+      "itemId": "spirit-mishka-1l",
+      "plcbItem": "000098661",
+      "run": 2,
+      "executionEngine": "figranium",
+      "taskId": "task_1788378025198",
+      "taskName": "FWGS PLCB Image Extractor",
+      "outcome": "success",
+      "finalUrl": "https://www.finewineandgoodspirits.com/product/000098661",
+      "durationMs": 20427,
+      "imageUrls": [
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v2450119215989133212/products/000098661_1035575_F1.jpg&height=475&width=475",
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v7111356916660438873/products/000098661_1035575_B1.jpg&height=475&width=475"
+      ],
+      "primaryImageUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v2450119215989133212/products/000098661_1035575_F1.jpg&height=475&width=475",
+      "candidateCount": 2,
+      "extractionSource": "embedded_json",
+      "identityEvidence": {
+        "plcbInPrimaryUrl": true,
+        "plcbInAnyUrl": true,
+        "productPathMatch": true,
+        "skuInJsonLd": false
+      },
+      "assetKey": "/file/v2450119215989133212/products/000098661_1035575_F1.jpg",
+      "reachabilityDirect": {
+        "httpStatus": 200,
+        "contentType": "image/jpeg",
+        "bytes": 10509,
+        "reachable": true
+      },
+      "reachabilityFigranium": null,
+      "falseRecommendationRisk": false,
+      "error": null,
+      "resultOrigin": "extraction",
+      "note": "retry after empty extract"
+    },
+    {
+      "case": 4,
+      "itemId": "spirit-mishka-1l",
+      "plcbItem": "000098661",
+      "run": 3,
+      "executionEngine": "figranium",
+      "taskId": "task_1788378025198",
+      "taskName": "FWGS PLCB Image Extractor",
+      "outcome": "success",
+      "finalUrl": "https://www.finewineandgoodspirits.com/product/000098661",
+      "durationMs": 15563,
+      "imageUrls": [
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v2450119215989133212/products/000098661_1035575_F1.jpg&height=475&width=475",
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v7111356916660438873/products/000098661_1035575_B1.jpg&height=475&width=475"
+      ],
+      "primaryImageUrl": "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v2450119215989133212/products/000098661_1035575_F1.jpg&height=475&width=475",
+      "candidateCount": 2,
+      "extractionSource": "embedded_json",
+      "identityEvidence": {
+        "plcbInPrimaryUrl": true,
+        "plcbInAnyUrl": true,
+        "productPathMatch": true,
+        "skuInJsonLd": false
+      },
+      "assetKey": "/file/v2450119215989133212/products/000098661_1035575_F1.jpg",
+      "reachabilityDirect": {
+        "httpStatus": 200,
+        "contentType": "image/jpeg",
+        "bytes": 10509,
+        "reachable": true
+      },
+      "reachabilityFigranium": null,
+      "falseRecommendationRisk": false,
+      "error": null,
+      "resultOrigin": "extraction",
+      "note": "retry after CF 502"
+    }
+  ],
+  "stability": {
+    "000004766": {
+      "runs": 3,
+      "primaryPresent": 3,
+      "exactUrlStable": true,
+      "assetKeyStable": true,
+      "uniqueExactUrls": [
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v4181866484679415500/products/000004766_1003007_F1.jpg&height=475&width=475"
+      ],
+      "uniqueAssetKeys": [
+        "/file/v4181866484679415500/products/000004766_1003007_F1.jpg"
+      ],
+      "sources": [
+        "embedded_json"
+      ]
+    },
+    "000009359": {
+      "runs": 3,
+      "primaryPresent": 3,
+      "exactUrlStable": true,
+      "assetKeyStable": true,
+      "uniqueExactUrls": [
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v8267655237597476021/products/000009359_F1.jpg&height=475&width=475"
+      ],
+      "uniqueAssetKeys": [
+        "/file/v8267655237597476021/products/000009359_F1.jpg"
+      ],
+      "sources": [
+        "embedded_json"
+      ]
+    },
+    "100056945": {
+      "runs": 3,
+      "primaryPresent": 3,
+      "exactUrlStable": true,
+      "assetKeyStable": true,
+      "uniqueExactUrls": [
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v6165810439292000430/products/100056945_F1.jpg&height=475&width=475"
+      ],
+      "uniqueAssetKeys": [
+        "/file/v6165810439292000430/products/100056945_F1.jpg"
+      ],
+      "sources": [
+        "embedded_json"
+      ]
+    },
+    "000098661": {
+      "runs": 3,
+      "primaryPresent": 3,
+      "exactUrlStable": true,
+      "assetKeyStable": true,
+      "uniqueExactUrls": [
+        "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v2450119215989133212/products/000098661_1035575_F1.jpg&height=475&width=475"
+      ],
+      "uniqueAssetKeys": [
+        "/file/v2450119215989133212/products/000098661_1035575_F1.jpg"
+      ],
+      "sources": [
+        "embedded_json"
+      ]
+    }
+  },
+  "summary": {
+    "totalRuns": 12,
+    "primaryPresent": 12,
+    "identityOk": 12,
+    "falseRecommendationRisk": 0,
+    "allExactUrlStable": true
+  }
+}

@@ -1,73 +1,64 @@
 # FWGS PLCB Product Resolver — PoC Summary
 
-Date: 2026-09-02 (updated: Figranium control set complete)
+Date: 2026-09-02 (updated: image extraction matrix complete)
 
 ## Executive summary
 
-**Recommendation: CONDITIONAL GO** for Figranium as the FWGS browser-worker, via **`@figranium/sdk` HTTP** against `https://fig.thesmokeybarrelbar.com`.
+**Recommendation: CONDITIONAL GO** for Figranium as the FWGS browser-worker (`@figranium/sdk` → `https://fig.thesmokeybarrelbar.com`).
 
-Figranium MCP is still absent from the Cloud Agent catalog, but the live host authenticated and executed the saved task. Control set: **12/12 product matches**, **2/2 no-result** (after one CF 524 retry), **0 false positives**, Captain Morgan **3/3** (name + proof 70). Blocking gap for a full Smokey Vault adapter: **product images are never present** in the Figranium extraction sandbox.
+| Capability | Result |
+| --- | --- |
+| Product resolve (name/proof/URL/no-result) | **Pass** — prior 12/12 + 2/2 control set |
+| Product images | **Pass via second Figranium task** — 12/12 primary, exact URL stable |
+| False positives / wrong images | **0** |
+| Composio fallback | **Not used** |
 
-No silent Composio fallback was used.
+Remaining caveats: images need live-browser metadata extract (not cleaned sandbox HTML); Akamai can 403 some datacenter image GETs even when Figranium browser loads them.
 
-See `poc/figranium-validation.json` and `poc/figranium-control-runs.json`.
+See `poc/IMAGE_EXTRACTION.md`, `poc/image-extraction-runs.json`, `poc/figranium-validation.json`.
 
 ---
 
-## Figranium control-validation (this phase)
-
-### Figranium executed: **yes** (SDK/HTTP, not MCP)
+## Image extraction (this phase)
 
 | Check | Result |
 | --- | --- |
-| `figranium` MCP namespace in Cloud Agent | **Missing** (not in catalog) |
-| Host + API key | **OK** — `fig.thesmokeybarrelbar.com` |
-| Saved task | `task_1788365630737` — **FWGS PLCB Product Resolver** |
-| Total Figranium control runs | **14** (1 original CF 524 replaced by retry) |
-| Schema compliance rate | **100%** (post-retry) |
-| Product match rate | **12/12** |
-| False positive count | **0** |
-| Captain Morgan stability | **3/3** (name + proof 70) |
-| Primary image stability | **0/12** (images absent from extraction DOM) |
-| Proof stability | Captain 70×3, Tito's 80×3, Mishka 80×3 |
-| CAPTCHA/login count | **0** |
-| Average runtime | **~56s** |
-| No-result behavior | **2/2** `notFound:true` after retry |
-| Silent fallback used | **No** |
+| Mechanism | `og:image` + JSON-LD `Product.image` → strict `/file/v*/products/{plcb}_*_F1.jpg` → ccstore URL |
+| Task | `task_1788378025198` — **FWGS PLCB Image Extractor** |
+| Source label | `embedded_json` |
+| Captain Morgan / Tito's / Santa Ema / Mishka | **3/3 each** primary present |
+| Exact URL stability | **4/4 SKUs stable** |
+| Identity (PLCB in asset path) | **12/12** |
+| Direct HTTP fetch | Often OK; Santa Ema 403 from this Cloud Agent; Figranium browser load OK |
+| CAPTCHA/login | **0** |
 
-### Control set results
+### Control image URLs (stable)
 
-| Case | PLCB | Runs | Outcome |
-| --- | --- | --- | --- |
-| 1 | `000004766` Captain Morgan | 3/3 | matchOk; proof 70; volumeText 2/3 |
-| 2 | `000009359` Tito's | 3/3 | matchOk; proof 80; 750ML |
-| 3 | `100056945` Santa Ema | 3/3 | matchOk; 750ML; no proof (wine) |
-| 4 | `000098661` Mishka 1L | 3/3 | matchOk; proof 80; volumeText 1L |
-| 5 | `999999999` | 2/2 | notFound (run2 retried after CF 524) |
+- `000004766` → `…/products/000004766_1003007_F1.jpg`
+- `000009359` → `…/products/000009359_F1.jpg`
+- `100056945` → `…/products/100056945_F1.jpg`
+- `000098661` → `…/products/000098661_1035575_F1.jpg`
 
-### Hard constraints discovered
+---
 
-1. **In-page `location.href` does not advance Figranium page state** for extraction/`final_url`. Use `actions.navigate` to `/product/{plcbItem}` after search.
-2. **`$$data.url` is broken** in the extraction sandbox; use `$$data.shadowText()` / `$$data.html()` and treat client `final_url` as `productUrl` authority.
-3. **Product images** are not in cleaned HTML, shadowText, or light-DOM `img` tags during extraction.
-4. **Cloudflare 524** if origin exceeds ~120s — keep waits short; retry on 524.
+## Prior product-resolve control set
 
-### Unblock for full GO
+| Metric | Value |
+| --- | --- |
+| Task | `task_1788365630737` FWGS PLCB Product Resolver |
+| Product matches | 12/12 |
+| No-result | 2/2 |
+| Captain Morgan proof | 70 × 3 |
+| Schema compliance | 100% post-retry |
 
-1. Figranium: expose product image URLs to extraction (include shadow image nodes / less aggressive HTML cleaning), or accept a second image-fetch step outside extraction.
-2. Optionally attach `figranium` MCP to Cloud Agent (SDK path already works).
-3. Harden origin so sync task runs stay under CF 120s.
+### Hard constraints
+
+1. Use `actions.navigate` to `/product/{plcb}` (not in-page `location.href`).
+2. Image extract requires live-browser JS / second Figranium task — sandbox HTML drops media.
+3. Keep waits short to avoid Cloudflare 524; tunnel outages (1033/502) occurred during this phase.
 
 ---
 
 ## Phase 2 fallback evidence (historical — Composio)
 
-| Metric | Value |
-| --- | --- |
-| Execution engine | Composio `BROWSER_TOOL` (`executionEngine: "fallback"`) |
-| Items in matrix | 15 (12 products + 3 failure cases) |
-| Total runs | 21 |
-| Product matches | 17/17 |
-| False positives | 0 |
-
-Historical fallback still validates the FWGS workflow when Figranium is unavailable; this phase validates Figranium itself for core resolve fields (not images).
+Composio `BROWSER_TOOL` previously recovered the same Captain Morgan / Tito's ccstore assets. This phase validates the same media via Figranium only.

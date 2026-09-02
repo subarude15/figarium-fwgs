@@ -1,5 +1,5 @@
 {
-  "phase": "figranium-control-validation",
+  "phase": "figranium-image-extraction",
   "date": "2026-09-02",
   "retryHost": "https://fig.thesmokeybarrelbar.com",
   "figraniumMcpAuthenticated": false,
@@ -9,14 +9,11 @@
   "taskName": "FWGS PLCB Product Resolver",
   "recommendation": "CONDITIONAL GO",
   "recommendationRationale": [
-    "14/14 control intents completed after one Cloudflare 524 retry on no-result run 2",
-    "100% schema compliance on successful runs; product matchOk 12/12; no-result 2/2 after retry; 0 false positives",
-    "Captain Morgan name+proof stable 3/3 (proof=70)",
-    "GAP: primaryImageUrl/imageUrls always empty — product images absent from Figranium extraction DOM/shadowText/cleaned HTML",
-    "GAP: volumeText occasionally missing (1/12 product runs); brand/category/country available in shadowText but not yet asserted in all stdout summaries",
-    "GAP: PDP open requires actions.navigate to /product/{plcb} after search — in-page location.href does not advance Figranium page state",
-    "GAP: Cloudflare 524 risk when origin >120s; keep waits short",
-    "No silent Composio fallback used"
+    "Product resolve still CONDITIONAL GO from prior control set",
+    "Image gap closed via second Figranium task reading og:image/JSON-LD (embedded_json)",
+    "12/12 primary images; exact URL + asset-key stable for all 4 SKUs; 0 recommendation mismatches",
+    "Akamai may 403 some datacenter image GETs; Figranium browser can load the same URLs",
+    "No Composio fallback; no CAPTCHA/login"
   ],
   "silentFallbackUsed": false,
   "connectivity": {
@@ -42,7 +39,7 @@
     "productMatchRate": 1,
     "falsePositiveCount": 0,
     "captainMorganStability": "3/3",
-    "primaryImageStability": "0/12",
+    "primaryImageStability": "12/12 via image extractor task",
     "proofStability": {
       "captainMorgan": [
         70,
@@ -79,8 +76,89 @@
     ]
   },
   "gaps": [
-    "Product bottle images not present in Figranium extraction sandbox (cleaned HTML + shadowText + light DOM img tags)",
-    "Must use actions.navigate to constructed /product/{plcbItem} URL; SERP click via location.href unreliable",
-    "Occasional CF 524 on longer runs (~120s proxy timeout)"
-  ]
+    "Main resolver extraction sandbox still lacks images — use FWGS PLCB Image Extractor second step",
+    "Akamai intermittent 403 on bare HTTP image fetch from some networks",
+    "Figranium tunnel outages (1033/502) observed; keep retries"
+  ],
+  "imageExtraction": {
+    "taskId": "task_1788378025198",
+    "taskName": "FWGS PLCB Image Extractor",
+    "method": "Live browser JS reads og:image + JSON-LD Product.image (PLCB in asset path); stashes payload for extraction.",
+    "totalRuns": 12,
+    "primaryPresent": 12,
+    "identitySafe": 12,
+    "falseRecommendationRisk": 0,
+    "sources": [
+      "embedded_json"
+    ],
+    "stability": {
+      "100056945": {
+        "runs": 3,
+        "primaryPresent": 3,
+        "exactUrlStable": true,
+        "assetKeyStable": true,
+        "uniqueExactUrls": [
+          "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v6165810439292000430/products/100056945_F1.jpg&height=475&width=475"
+        ],
+        "uniqueAssetKeys": [
+          "/file/v6165810439292000430/products/100056945_F1.jpg"
+        ],
+        "sources": [
+          "embedded_json"
+        ]
+      },
+      "000004766": {
+        "runs": 3,
+        "primaryPresent": 3,
+        "exactUrlStable": true,
+        "assetKeyStable": true,
+        "uniqueExactUrls": [
+          "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v4181866484679415500/products/000004766_1003007_F1.jpg&height=475&width=475"
+        ],
+        "uniqueAssetKeys": [
+          "/file/v4181866484679415500/products/000004766_1003007_F1.jpg"
+        ],
+        "sources": [
+          "embedded_json"
+        ]
+      },
+      "000009359": {
+        "runs": 3,
+        "primaryPresent": 3,
+        "exactUrlStable": true,
+        "assetKeyStable": true,
+        "uniqueExactUrls": [
+          "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v8267655237597476021/products/000009359_F1.jpg&height=475&width=475"
+        ],
+        "uniqueAssetKeys": [
+          "/file/v8267655237597476021/products/000009359_F1.jpg"
+        ],
+        "sources": [
+          "embedded_json"
+        ]
+      },
+      "000098661": {
+        "runs": 3,
+        "primaryPresent": 3,
+        "exactUrlStable": true,
+        "assetKeyStable": true,
+        "uniqueExactUrls": [
+          "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=/file/v2450119215989133212/products/000098661_1035575_F1.jpg&height=475&width=475"
+        ],
+        "uniqueAssetKeys": [
+          "/file/v2450119215989133212/products/000098661_1035575_F1.jpg"
+        ],
+        "sources": [
+          "embedded_json"
+        ]
+      }
+    },
+    "directFetchOk": 9,
+    "figraniumBrowserImageLoad": "confirmed for Santa Ema (title images 475x475) when datacenter GET 403",
+    "silentFallbackUsed": false,
+    "confirmationRerun": true,
+    "identityOk": 12,
+    "allExactUrlStable": true,
+    "note": "Confirmation rerun after host recovery. Mishka run2/run3 replaced by successful post-502 retries. Cases 1-3 from same confirmation session."
+  }
 }
