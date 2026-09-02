@@ -27,22 +27,35 @@ const mode = process.env.MODE || 'matrix';
 
 function assetKey(url) {
   if (!url) return null;
-  try {
-    const u = new URL(url);
-    const src = u.searchParams.get('source');
-    if (src) return src;
-    return u.pathname;
-  } catch {
-    const m = String(url).match(/\/file\/[^?&#]+\/products\/[^?&#]+/i);
-    return m ? m[0] : url;
+  const m = String(url).replace(/&amp;/g, '&').match(/\/file\/v[0-9]+\/products\/[A-Za-z0-9._-]+\.(?:jpg|jpeg|png|webp)/i);
+  return m ? m[0] : null;
+}
+
+function normalizeImageUrl(url, plcbItem) {
+  const key = assetKey(url);
+  if (!key) return null;
+  if (plcbItem && !key.includes(plcbItem)) return null;
+  return 'https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=' + key + '&height=475&width=475';
+}
+
+function normalizeImageList(urls, plcbItem) {
+  const out = [];
+  for (const u of urls || []) {
+    const n = normalizeImageUrl(u, plcbItem);
+    if (n && !out.includes(n)) out.push(n);
   }
+  return out;
 }
 
 const extractionScript = `
 const plcbItem = "{$plcbItem}";
+const FILE_RE = /\\/file\\/v[0-9]+\\/products\\/[A-Za-z0-9._-]+\\.(?:jpg|jpeg|png|webp)/ig;
+function absCcstore(filePath) {
+  return "https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=" + filePath + "&height=475&width=475";
+}
 function empty() {
   return {
-    matched: true,
+    matched: false,
     plcbItem,
     imageUrls: [],
     primaryImageUrl: null,
@@ -52,65 +65,60 @@ function empty() {
     diagnostics: { captchaSeen: false, loginRequired: false, selectorFailures: [], durationMs: null }
   };
 }
+function collectFromText(text, source, bucket) {
+  if (!text) return;
+  const re = /\\/file\\/v[0-9]+\\/products\\/[A-Za-z0-9._-]+\\.(?:jpg|jpeg|png|webp)/ig;
+  let m;
+  while ((m = re.exec(String(text))) !== null) {
+    const p = m[0];
+    if (plcbItem && !p.includes(plcbItem)) continue;
+    if (/logo|icon|banner|favicon|general\\//i.test(p)) continue;
+    if (!bucket.some(x => x.filePath === p)) bucket.push({ filePath: p, source });
+  }
+}
 try {
-  const el = document.getElementById('fwgs-image-payload');
+  const el = document.getElementById("fwgs-image-payload");
   if (el && el.textContent) {
     const payload = JSON.parse(el.textContent);
-    return Object.assign(empty(), payload, { matched: !!(payload.primaryImageUrl) });
+    if (payload && payload.primaryImageUrl) {
+      return Object.assign(empty(), payload, { matched: true });
+    }
   }
 } catch (e) {}
 
-// Fallback: read structured metadata directly if still present in extraction DOM
 const found = [];
-function add(u, source) {
-  if (!u) return;
-  const s = String(u);
-  if (!/products\\//i.test(s) && !/ccstore\\/v1\\/images/i.test(s)) return;
-  if (/logo|icon|banner|favicon|occ-public|general\\//i.test(s)) return;
-  if (plcbItem && !s.includes(plcbItem)) return;
-  let abs = s;
-  try { abs = new URL(s, 'https://www.finewineandgoodspirits.com/').href; } catch (e) {}
-  if (!found.some(x => x.url === abs)) found.push({ url: abs, source });
-}
 const og = document.querySelector('meta[property="og:image"], meta[property="og:image:secure_url"]');
-if (og) add(og.getAttribute('content'), 'embedded_json');
+if (og) collectFromText(og.getAttribute("content"), "embedded_json", found);
 document.querySelectorAll('script[type="application/ld+json"]').forEach(function(node){
-  try {
-    const j = JSON.parse(node.textContent || '');
-    const nodes = Array.isArray(j) ? j : [j].concat(j['@graph'] || []);
-    nodes.forEach(function(n){
-      [].concat((n && n.image) || []).flat().forEach(function(u){
-        add(typeof u === 'string' ? u : (u && u.url), 'embedded_json');
-      });
-    });
-  } catch (e) {}
+  collectFromText(node.textContent || "", "embedded_json", found);
 });
-const attr = document.documentElement.getAttribute('data-fwgs-primary-image');
-if (attr) add(attr, document.documentElement.getAttribute('data-fwgs-image-source') || 'dom');
+const attr = document.documentElement.getAttribute("data-fwgs-primary-image");
+if (attr) collectFromText(attr, document.documentElement.getAttribute("data-fwgs-image-source") || "dom", found);
 
-let html = '';
-try { html = String($$data.html() || ''); } catch (e) {}
-const fileHits = html.match(/\\/file\\/[^"'\\\\s>]+\\/products\\/[^"'\\\\s>]+/ig) || [];
-fileHits.forEach(function(p){
-  if (plcbItem && !p.includes(plcbItem)) return;
-  add('https://www.finewineandgoodspirits.com/ccstore/v1/images/?source=' + p + '&height=475&width=475', 'other');
+let html = "";
+try { html = String($$data.html() || ""); } catch (e) {}
+collectFromText(html, "other", found);
+
+found.sort(function(a,b){
+  const score = function(c){ return (/_F1\\./i.test(c.filePath)?50:0) + (c.source==="embedded_json"?30:0) + (/_B1\\./i.test(c.filePath)?20:0); };
+  return score(b) - score(a);
 });
-
-const primary = found.find(x => /_F1\\./i.test(x.url)) || found[0] || null;
+const primary = found.find(function(x){ return /_F1\\./i.test(x.filePath); }) || found[0] || null;
+const imageUrls = found.map(function(x){ return absCcstore(x.filePath); });
 return {
   matched: !!primary,
   plcbItem,
-  imageUrls: found.map(x => x.url),
-  primaryImageUrl: primary ? primary.url : null,
+  imageUrls: imageUrls,
+  primaryImageUrl: primary ? absCcstore(primary.filePath) : null,
   extractionSource: primary ? primary.source : null,
   candidateCount: found.length,
   identityEvidence: {
-    plcbInPrimaryUrl: !!(primary && primary.url.includes(plcbItem)),
-    plcbInAnyUrl: found.some(x => x.url.includes(plcbItem)),
+    plcbInPrimaryUrl: !!(primary && primary.filePath.includes(plcbItem)),
+    plcbInAnyUrl: found.some(function(x){ return x.filePath.includes(plcbItem); }),
     productPathMatch: true,
     skuInJsonLd: false
   },
-  diagnostics: { captchaSeen: false, loginRequired: false, selectorFailures: primary ? [] : ['primary_image_missing'], durationMs: null }
+  diagnostics: { captchaSeen: false, loginRequired: false, selectorFailures: primary ? [] : ["primary_image_missing"], durationMs: null }
 };
 `;
 
@@ -167,7 +175,7 @@ async function probeReachabilityViaFigranium(taskId, imageUrl) {
       actions: [
         actions.navigate(imageUrl),
         actions.wait(2),
-        actions.javascript(`(() => ({ href: location.href, title: document.title, bodyStart: (document.body && document.body.innerText || '').slice(0,120), isImg: /\\\\.(jpg|jpeg|png|webp)/i.test(location.pathname) || /ccstore\\\\/v1\\\\/images/i.test(location.href) }))()`),
+        actions.javascript(`(() => ({ href: location.href, title: document.title, bodyStart: (document.body && document.body.innerText || '').slice(0,120), looksLikeImageEndpoint: /ccstore\\/v1\\/images/i.test(location.href) }))()`),
       ],
       extractionScript: `return { href: location.href, contentTypeGuess: document.contentType || null, title: document.title };`,
     };
@@ -191,7 +199,7 @@ async function directFetch(url) {
     const res = await fetch(url, { method: 'GET', redirect: 'follow', signal: AbortSignal.timeout(20000), headers: { 'user-agent': 'Mozilla/5.0' } });
     const ctype = res.headers.get('content-type');
     const buf = Buffer.from(await res.arrayBuffer());
-    return { httpStatus: res.status, contentType: ctype, bytes: buf.length, reachable: res.ok && /image\\//i.test(ctype || '') };
+    return { httpStatus: res.status, contentType: ctype, bytes: buf.length, reachable: res.ok && /^image\//i.test(ctype || '') };
   } catch (e) {
     return { reachable: false, error: e.message };
   }
@@ -219,8 +227,9 @@ async function runOne(task, c, run, { checkReach } = {}) {
   }
   const durationMs = Date.now() - t0;
   const picked = pickResult(raw);
-  const imageUrls = Array.isArray(picked.imageUrls) ? picked.imageUrls : [];
-  const primaryImageUrl = picked.primaryImageUrl || imageUrls[0] || null;
+  let imageUrls = normalizeImageList(Array.isArray(picked.imageUrls) ? picked.imageUrls : [], c.plcbItem);
+  let primaryImageUrl = normalizeImageUrl(picked.primaryImageUrl, c.plcbItem) || imageUrls.find(u => /_F1\./i.test(u)) || imageUrls[0] || null;
+  if (primaryImageUrl && !imageUrls.includes(primaryImageUrl)) imageUrls = [primaryImageUrl, ...imageUrls];
   const primarySource = picked.primarySource || picked.extractionSource || null;
   const identityEvidence = picked.identityEvidence || {
     plcbInPrimaryUrl: !!(primaryImageUrl && primaryImageUrl.includes(c.plcbItem)),
@@ -259,7 +268,7 @@ async function runOne(task, c, run, { checkReach } = {}) {
 }
 
 async function main() {
-  const healthRes = await fetch(baseUrl.replace(/\\/$/, '') + '/api/health');
+  const healthRes = await fetch(baseUrl.replace(/\/$/, '') + '/api/health');
   const healthText = await healthRes.text();
   let health;
   try { health = JSON.parse(healthText); } catch { health = { raw: healthText }; }
@@ -283,7 +292,7 @@ async function main() {
   for (const c of selected) {
     const runs = onlyRuns || 3;
     for (let run = 1; run <= runs; run++) {
-      console.log(`\\n=== case ${c.case} ${c.plcbItem} run ${run}/${runs} ===`);
+      console.log(`\n=== case ${c.case} ${c.plcbItem} run ${run}/${runs} ===`);
       const rec = await runOne(task, c, run, { checkReach: run === 1 && c.case === 1 });
       all.push(rec);
       fs.writeFileSync(progressPath, JSON.stringify({ completed: all.length, total: selected.length * (onlyRuns || 3), latest: rec }, null, 2));
